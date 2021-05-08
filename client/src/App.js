@@ -9,7 +9,7 @@ class App extends React.Component {//newly created function
         this.state = {apiResponse:""};
     }
     callAPI() {
-        fetch("http://localhost:9000/test") //fetch from backend
+        fetch("http://localhost:9000") //fetch from backend
             .then(res => res.text())
             .then(res => this.setState({ apiResponse: res })); //get the response from page
     }
