@@ -1,21 +1,18 @@
 import mongoose from 'mongoose'
+var user = require('./user')
 const eventschema = mongoose.Schema({
     sdate: {
-        type: String,
-        required: true
+        type: String
     },
     stime:{
-        type: String,
-        required: true
+        type: String
     },
     edate:{
-        type: String,
-        requried: true
+        type: String
     },
     etime:{
-        type: String,
-        required: true
+        type: String
     },
-    user: [userschema]
+    username: [user]
 });
 module.exports = mongoose.model('Event', eventschema);
