@@ -3,7 +3,7 @@
 http://localhost:3000 for client
 http://localhost:9000/ for server
 
-To start this project in the terminal, write git clone https://github.com/kp255928/cs35l_project.git in the terminal.
+To start this project(first time) in the terminal, write git clone https://github.com/kp255928/cs35l_project.git in the terminal.
 next, type cd cs35l_project 
 
 next time you work on the project can just type git pull in terminal
