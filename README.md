@@ -3,6 +3,9 @@
 http://localhost:3000 for client
 http://localhost:9000/ for server
 
+To do this project in the terminal, write git clone https://github.com/kp255928/cs35l_project.git in the terminal.
+next, type cd cs35l_project 
+
 need to type "npm install" in the project folder in the terminal when you start this project
 
 I Only touched the files:
