@@ -11,7 +11,7 @@ next time you work on the project can just type git pull in terminal
 need to type "npm install" in the project folder in the terminal when you first start this project
 
 
-when finished your work, remember to do the following so the teacher can see you contributing when grading
+when finished your work, remember to do the following so the teacher can see you contributing when grading:
 git add .
 git commit
 git push
