@@ -3,6 +3,8 @@
 http://localhost:3000 for client
 http://localhost:9000/ for server
 
+need to type "npm install" in the project folder in the terminal when you start this project
+
 I Only touched the files:
 server/bin
 server/datamodel
@@ -28,3 +30,11 @@ Need to connect this to the front end where it will invoke these requests to the
 server/routes/user.js idk what is this used for, but only for testing for now.
 
 server/datamodel contains the database objects (only two for now - user and events), which are used when making a event or user
+
+
+TODO: create login page, create some buttons or something in the front end to let user create an event
+these buttons will call the backend functions or something to put entries in the database
+create calander view.
+search function (search from the database, display it in frontend
+
+
