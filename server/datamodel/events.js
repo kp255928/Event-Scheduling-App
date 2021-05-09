@@ -1,5 +1,7 @@
-import mongoose from 'mongoose'
-var user = require('./user')
+
+
+const mongoose = require('mongoose');
+//var user = require('./user')
 const eventschema = mongoose.Schema({
     sdate: {
         type: String
@@ -13,6 +15,9 @@ const eventschema = mongoose.Schema({
     etime:{
         type: String
     },
-    username: [user]
+    //username: [user]
+    //event name?
+ 
 });
+
 module.exports = mongoose.model('Event', eventschema);

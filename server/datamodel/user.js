@@ -1,6 +1,10 @@
-import mongoose from 'mongoose'
 
-const userschema = new mongoose.Schema({
+
+const mongoose = require('mongoose');
+
+const Schema = mongoose.Schema;
+
+const userSchema = new Schema({
     username:{
         type:String,
         unique: true,
@@ -8,8 +12,13 @@ const userschema = new mongoose.Schema({
     },
     password:{
         type:String,
-        unique: true,
+        //unique: true, //passwords doesn't have to be unique?
         required: true
-    }
+    },
+}, {
+        timestamps: true,
+
 });
-modele.export = mongoose.model('User', userschema);
+const User = mongoose.model('User', userSchema);
+
+module.exports = User;
