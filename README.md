@@ -46,6 +46,6 @@ server/datamodel contains the database objects (only two for now - user and even
 TODO: create login page, create some buttons or something in the front end to let user create an event
 these buttons will call the backend functions or something to put entries in the database
 create calander view.
-search function (search from the database, display it in frontend
+search function (search from the database, display it in frontend 
 
 
