@@ -3,10 +3,18 @@
 http://localhost:3000 for client
 http://localhost:9000/ for server
 
-To do this project in the terminal, write git clone https://github.com/kp255928/cs35l_project.git in the terminal.
+To start this project in the terminal, write git clone https://github.com/kp255928/cs35l_project.git in the terminal.
 next, type cd cs35l_project 
 
-need to type "npm install" in the project folder in the terminal when you start this project
+next time you work on the project can just type git pull in terminal
+
+need to type "npm install" in the project folder in the terminal when you first start this project
+
+
+when finished the project, remember to do the following so the teacher can see you contributing when grading
+git add .
+git commit
+git push
 
 I Only touched the files:
 server/bin
