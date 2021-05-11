@@ -14,13 +14,15 @@ router.route('/add').post((req, res) => {
     const stime = req.body.stime;
     const edate = req.body.edate;
     const etime = req.body.etime;
+    const eventname = req.body.eventname;
 
     const newEvent = new Event({
-        username,
         sdate,
         stime,
         edate,
         etime,
+        eventname,
+        username
     });
 
     newEvent.save()
