@@ -4,7 +4,7 @@ const Event = require('../datamodel/events')
 const User = require('../datamodel/user')
 const router = express.Router();
 // login and re
-router.set('view-engine', 'ejs');
+// router.set('view-engine', 'ejs');
 
 router.get('/register',(req, res) =>{
     res.render('register.ejs')

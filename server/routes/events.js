@@ -29,6 +29,25 @@ router.route('/add').post((req, res) => {
         .then(() => res.json('Event added!'))
         .catch(err => res.status(400).json('Error: ' + err));
 });
+
+router.route('/delete/:id').delete((req, res) => {
+    Event.findByIdAndDelete(req.params.id)
+        .then(() => res.json('Event deleted.'))
+        .catch(err => res.status(400).json('Error: ' + err));
+})
+
+//delete bu event id
+
+router.route('/search').get(async (req, res) => {
+    const event = await Event.find({eventname: "lol"})
+    if (!event){
+        return res.status(400).json('Event not found.')
+    }
+    return res.json(event)
+})
+
+//search by eventname
+
 /*
 router.route('/:id').get((req, res) => {
     Event.findById(req.params.id)
@@ -36,7 +55,7 @@ router.route('/:id').get((req, res) => {
         .catch(err => res.status(400).json('Error: ' + err));
 });
 
-router.route('/:id').delete((req, res) => {
+router.route('/').delete((req, res) => {
     Event.findByIdAndDelete(req.params.id)
         .then(() => res.json('Exercise deleted.'))
         .catch(err => res.status(400).json('Error: ' + err));
