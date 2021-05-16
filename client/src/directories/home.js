@@ -1,5 +1,6 @@
 import React from 'react';
 import './home.css';
+import SearchField from "react-search-field";
 
 // function home() {
 //     return(
@@ -12,6 +13,12 @@ import './home.css';
 const Home = () => {
     return(
         <div classname="homeText">
+            <SearchField
+                placeholder="Search..."
+                searchText="yooooo!"
+                // onChange={(e) => onChange}
+                classNames="teat-class"
+            />
             <h1 className="greet">Hello there! This is the Homepage</h1>
             <p>Click on the botton to redirect for now!</p>
             
