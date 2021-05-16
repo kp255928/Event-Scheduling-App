@@ -1,6 +1,8 @@
 import React from 'react';
-//import logo from './logo.svg';
+import logo from './logo.svg';
 import './App.css';
+import WebPages from './directories/webpage';
+
 
 
 class App extends React.Component {//newly created function
@@ -19,16 +21,19 @@ class App extends React.Component {//newly created function
     }
 
 
-render(){
-    return (
-        <div className="App">
-            <header className="App-header">
-            </header>
-            <p>{this.state.apiResponse}</p>
-        </div>
-      
-  );
-}
+  render(){
+      return (
+          <div className="App">
+
+            <WebPages />
+              {/* <header className="App-header">
+                
+              </header>
+              <p>{this.state.apiResponse}</p> */}
+          </div>
+        
+    );
+  }
 }
 
 export default App;
