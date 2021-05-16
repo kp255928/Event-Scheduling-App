@@ -7,7 +7,7 @@ import {
 } from "react-router-dom";
 
 import Home from './home';
-import LogIn from './login';
+import Login from './login';
 import SignUp from './signup';
 import AddCalendar from './addCal';
 import Invite from './invite';
@@ -17,7 +17,7 @@ const WebPages = () => {
     return(
         <Router>
             <Route exact path="/" component= {Home} />
-            <Route exact path="/login" component= {LogIn} />
+            <Route exact path="/login" component= {Login} />
             <Route exact path="/signup" component= {SignUp} />
             <Route exact path="/addcalendar" component= {AddCalendar} />
             <Route exact path="/invite" component= {Invite} />
