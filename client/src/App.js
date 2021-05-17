@@ -1,7 +1,7 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import NavBar from './NavBar';
-import AddCalendar from './directories/AddCal';
+import AddCalendar from './directories/addCal';
 import Home from './directories/Home';
 import Invite from './directories/Invite';
 import Login from './directories/LogIn';
