@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
+import ReactDom from "react-dom";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import {Auth} from "aws-amplify";
-import './home.css';
+import '../index.css';
 
 export default function Login(){
     const [name, setName] = useState("");
@@ -13,11 +14,11 @@ export default function Login(){
             document.title = 'Log In';
         });
     
-        return(
-            <div>
-                <h1 className="greet">This is the Log in page</h1>
-            </div>
-        );
+        // return(
+        //     <div>
+        //         <h1 className="greet">This is the Log in page</h1>
+        //     </div>
+        // );
     }
 
     function validateForm(){
@@ -27,12 +28,12 @@ export default function Login(){
     async function handleSubmit(event){
         event.preventDefault();
 
-        try{
-            await Auth.signIn(name, password);
-            alert("Logged in");
-        } catch(e){
-            alert(e.message);
-        }
+        // try{
+        //     await Auth.signIn(name, password);
+        //     alert("Logged in");
+        // } catch(e){
+        //     alert(e.message);
+        // }
     }
 
     return(
@@ -62,3 +63,10 @@ export default function Login(){
         </div>
     )
 }
+
+// const Login = () => {
+//     return(
+//         <h1 className="greet">This is login page</h1>
+//     );
+// }
+// export default Login;

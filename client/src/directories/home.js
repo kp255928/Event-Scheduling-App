@@ -1,5 +1,5 @@
 import React from 'react';
-import './home.css';
+import '../index.css';
 import SearchField from "react-search-field";
 
 // function home() {
