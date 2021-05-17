@@ -1,12 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { BrowserRouter as Router, Route, Switch, useHistory } from 'react-router-dom';
 import NavBar from './NavBar';
-<<<<<<< HEAD
-import AddCalendar from './directories/addCal';
-import Home from './directories/home';
-import Invite from './directories/invite';
-import Login from './directories/login';
-import SignUp from './directories/signup';
+import AddCalendar from './directories/AddCal';
+import Home from './directories/Home';
+import Invite from './directories/Invite';
+import Login from './directories/LogIn';
+import SignUp from './directories/SignUp';
 import {AppContext} from './libs/contextLib';
 import {Auth} from "aws-amplify";
 import {onError} from "./libs/errorLib";
@@ -75,13 +74,6 @@ function APP(){
     )
   );
 }
-=======
-import AddCalendar from './directories/AddCal';
-import Home from './directories/Home';
-import Invite from './directories/Invite';
-import Login from './directories/LogIn';
-import SignUp from './directories/SignUp';
->>>>>>> 4f054c019e1b605e0ab5fe886141b3161f52ef44
 
 class App extends React.Component {//newly created function
     constructor(props) {
