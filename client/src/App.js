@@ -47,7 +47,6 @@ class App extends React.Component {//newly created function
               </Route>
             </Switch>
           </div>
-
         </div>
       </Router>
     );
