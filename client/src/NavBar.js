@@ -12,6 +12,15 @@ const NavBar = () => {
                 <Link to="/addEvent" className="link">Add Events</Link>
                 <Link to="/invite" className="link">Invite friends</Link>
             </div>
+            <div id="searchWrapper">
+                <input
+                    type="text"
+                    name="searchBar"
+                    id="searchBar"
+                    placeholder="search for a event"
+                />
+            </div>
+            <ul id="eventList"></ul>
         </nav>
     );
 } 
