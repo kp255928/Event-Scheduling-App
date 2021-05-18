@@ -10,9 +10,11 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 in the client directory<br /><br />
 
-<br>To open the webpage, install the following:
+<br>To open the webpage properly, install the following packages:
 
 ### `npm install react-router-dom`
+
+### `npm install react-calendar`
 
 <br /><br />
 
