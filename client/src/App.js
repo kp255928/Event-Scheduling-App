@@ -39,7 +39,7 @@ class App extends React.Component {//newly created function
               <Route exact path="/signup">
                 <SignUp />
               </Route>
-              <Route exact path="/addEvent">
+              <Route exact path="/create">
                 <AddCalendar />
               </Route>
               <Route exact path="/invite">

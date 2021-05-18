@@ -15,19 +15,21 @@ const Login = () => {
             <div className="userform">
             <h2 className="pagename">Log in</h2>
             <form>
-                <label>Username:</label>
+                {/* <label>Username:</label> */}
                 <input
                     type="text"
                     required
                     value={ username }
                     onChange={ (e) => setName(e.target.value) }
+                    placeholder="Username"
                 />
-                <label>Password:</label>
+                {/* <label>Password:</label> */}
                 <input
                     type="password"
                     required
                     value={ password }
                     onChange={ (e) => setPassword(e.target.value) }
+                    placeholder="Password"
                 />
                 <button>Log In</button>
             </form>

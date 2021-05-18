@@ -14,19 +14,21 @@ const SignUp = () => {
             <div className="userform">
             <h2 className="pagename">Create account</h2>
             <form>
-                <label>Username:</label>
+                {/* <label>Username:</label> */}
                 <input
                     type="text"
                     required
                     value={ username }
                     onChange={ (e) => setName(e.target.value) }
+                    placeholder="Create Username"
                 />
-                <label>Password:</label>
+                {/* <label>Password:</label> */}
                 <input
                     type="text"
                     required
                     value={ password }
                     onChange={ (e) => setPassword(e.target.value) }
+                    placeholder="Create Password"
                 />
                 <button>Sign up</button>
             </form>
