@@ -1,72 +1,44 @@
 import React, { useState, useEffect } from "react";
-import ReactDom from "react-dom";
-import Form from "react-bootstrap/Form";
-import Button from "react-bootstrap/Button";
-import {Auth} from "aws-amplify";
+import { Link } from 'react-router-dom';
 import '../index.css';
 
-export default function Login(){
-    const [name, setName] = useState("");
-    const [password, setPasssword] = useState("");
+const Login = () => {
+    useEffect(() => {
+        document.title = 'Log In';
+    });
 
-    const Login = () => {
-        useEffect(() => {
-            document.title = 'Log In';
-        });
-    
-        // return(
-        //     <div>
-        //         <h1 className="greet">This is the Log in page</h1>
-        //     </div>
-        // );
-    }
-
-    function validateForm(){
-        return name.length > 0 && password.length > 0;
-    }
-
-    async function handleSubmit(event){
-        event.preventDefault();
-
-        // try{
-        //     await Auth.signIn(name, password);
-        //     alert("Logged in");
-        // } catch(e){
-        //     alert(e.message);
-        // }
-    }
+    const [username, setName] = useState('');
+    const [password, setPassword] = useState('');
 
     return(
-        <div className = "LogIn">
-            <Form onSubmit={handleSubmit}>
-                <Form.Group size="lg" controlId="name">
-                    <Form.label>Name</Form.label>
-                    <Form.Control
-                    autoFocus
-                    type="name"
-                    value={name}
-                    onChange={(e) => setName(e.target.value)}
-                    />
-                </Form.Group>
-                <Form.Group size="lg" controlId="password">
-                    <Form.label>Password</Form.label>
-                    <Form.Control
+        <div className="login">
+            <div className="userform">
+            <h2 className="pagename">Log in</h2>
+            <form>
+                <label>Username:</label>
+                <input
+                    type="text"
+                    required
+                    value={ username }
+                    onChange={ (e) => setName(e.target.value) }
+                />
+                <label>Password:</label>
+                <input
                     type="password"
-                    value={password}
-                    onChange={(e) => setPasssword(e.target.value)}
-                    />
-                </Form.Group>
-                <Button block size="lg" type="submit" disabled={!validateForm()}>
-                    Login
-                </Button>
-            </Form>
+                    required
+                    value={ password }
+                    onChange={ (e) => setPassword(e.target.value) }
+                />
+                <button>Log In</button>
+            </form>
+            </div>
+            <div className="accountaction">
+                <label className="accountmessage">Don't have an account?</label>
+                <div className="accountlinks">
+                    <Link to="/signup" className="link">Sign up</Link>
+                </div>
+            </div>
         </div>
-    )
+    );
 }
-
-// const Login = () => {
-//     return(
-//         <h1 className="greet">This is login page</h1>
-//     );
-// }
-// export default Login;
+export default Login;

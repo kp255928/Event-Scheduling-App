@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import '../index.css';
 import SearchField from "react-search-field";
 
@@ -11,6 +11,9 @@ import SearchField from "react-search-field";
 // }
 
 const Home = () => {
+    useEffect(() => {
+        document.title = 'Home';
+    });
     return(
         <div classname="homeText">
             <SearchField

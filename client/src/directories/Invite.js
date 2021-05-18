@@ -1,7 +1,10 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import '../index.css';
 
 const Invite = () => {
+    useEffect(() => {
+        document.title = 'Add Friend';
+    });
     return(
         <div>
             <h1 className="greet">Share with people</h1>   

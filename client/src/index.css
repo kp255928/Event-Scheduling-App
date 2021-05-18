@@ -1,14 +1,14 @@
 * {
   text-align: center;
 }
- 
+ /* NavBar */
 .navbar {
   padding: 18px;
   display: flex;
   align-items: center;
   max-width: 1000px;
   margin: 0 auto;
-  border-bottom: 1px solid gray;
+  border-bottom:0.5px solid gray;
 }
 .navbar .icon {
   font-size: 35px;
@@ -26,8 +26,117 @@
   margin-left: 16px ;
   margin-top: auto;
   padding: 6px;
+  text-decoration: none;
 }
 
+/* Log In and sign up */
+.login {
+  max-width: 400px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.signup {
+  max-width: 400px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.pagename {
+  font-size: 30px;
+  color: rgb(45,104,196);
+  margin-top: 40px;
+  margin-bottom: 30px;
+}
+
+.login form label {
+  font-size: 20px;
+  text-align: left;
+  display: block;
+}
+
+.signup form label {
+  font-size: 20px;
+  text-align: left;
+  display: block;
+}
+
+.login input {
+  text-align: left;
+  font-size: 15px;
+  width: 100%;
+  padding: 10px 10px;
+  margin: 10px 0px;
+  border: 2px solid rgb(45,104,196);
+  border-radius: 7px;
+  box-sizing: border-box;
+  display: block;
+}
+
+.signup input {
+  text-align: left;
+  font-size: 15px;
+  width: 100%;
+  padding: 10px 10px;
+  margin: 10px 0px;
+  border: 2px solid rgb(45,104,196);
+  border-radius: 7px;
+  box-sizing: border-box;
+  display: block;
+}
+
+.login button {
+  width: 100%;
+  font-size: 20px;
+  background: rgb(45,104,196);
+  color: white;
+  border: 0px;
+  padding: 8px;
+  border-radius: 8px;
+  cursor: pointer;
+  margin-bottom: 25px;
+}
+
+.signup button {
+  width: 100%;
+  font-size: 20px;
+  background: rgb(45,104,196);
+  color: white;
+  border: 0px;
+  padding: 8px;
+  border-radius: 8px;
+  cursor: pointer;
+  margin-bottom: 25px;
+}
+
+.userform {
+  border-bottom: 0.5px solid gray;
+}
+
+.accountaction{
+  font-size: 16px;
+  padding: 10px;
+  align-items: center;
+  text-align: center;
+  display: inline-flex;
+}
+
+.accountmessage {
+  color: gray;
+  padding: 10px;
+}
+
+.accountaction .accountlink {
+  margin-left: auto;
+}
+
+.accountaction .accountlinks .link {
+  color: rgb(45,104,196);
+  text-decoration: none;
+  margin-top: auto;
+}
+
+/* Others */
 .greet {
   color: rgb(45,104,196);
   
