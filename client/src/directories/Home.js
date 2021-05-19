@@ -1,17 +1,29 @@
-import React, {useEffect} from 'react';
-import Calendar from 'react-calendar';
+import React, {useEffect, useState} from 'react';
 import '../index.css';
 
 const Home = () => {
     useEffect(() => {
         document.title = 'Home';
     });
+
+    const [events, setEvents] = useState([
+        {title: 'Git repository organization due', date:'May 31', discription:'Git repository organization due', id: 1},
+        {title: 'Project source code due', date:'June 2', discription:'Project source code due', id: 2},
+        {title: 'Project Final Report due', date:'June 4', discription:'Project Final Report due', id: 3},
+        {title: 'End-of-quarter LA feedback survey due', date:'June 4', discription:'End-of-quarter LA feedback survey due', id: 4}
+
+    ]);
+
     return(
-        <div classname="homeText">
-            <h1 className="greet">Hello there! This is the Homepage</h1>
-            <p>Click on the botton to redirect for now!</p>
-            <Calendar></Calendar>
-            
+        <div className="home">
+            <h2 className="home-message">Hello guys! This is the new view of our calendar home</h2>
+            <h2 className="home-message">and here are some upcoming events</h2>
+            {events.map((event) =>(
+                <div className="event-preview" key={event.id}>
+                    <h2>{ event.title }</h2>
+                    <p>date: { event.date }</p>
+                </div>
+            ))}
         </div>
     );
 };

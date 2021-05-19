@@ -1,6 +1,6 @@
-* {
+/* * {
   text-align: center;
-}
+} */
  /* NavBar */
 .navbar {
   padding: 18px;
@@ -42,6 +42,38 @@
   margin-top: auto;
   padding: 6px;
   text-decoration: none;
+}
+
+/* Home */
+.home {
+  max-width: 900px;
+  margin: 40px auto;
+}
+
+.home-message {
+  font-size: 20px;
+  color: rgb(45,104,196);
+  margin-bottom: 8px;
+  text-align: center;
+}
+.event-preview {
+  margin: 40px auto;
+  padding: 10px 16px;
+  border: 1px solid #eaeaea;
+}
+
+.event-preview:hover {
+  box-shadow: 1px 3px 5px rgb(45,104,196);
+}
+
+.event-preview h2 {
+  font-size: 20px;
+  color: rgb(45,104,196);
+  margin-bottom: 8px;
+}
+
+.event-preview p {
+  color: gray;
 }
 
 /* Log In and sign up */
