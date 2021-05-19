@@ -16,6 +16,8 @@ in the client directory<br /><br />
 
 <br />
 
+DO THIS ONLY IF YOU ALREADY INSTALLED react-calendar
+
 ### `react-calendar`
 
 is no longer needed, so you can do 
