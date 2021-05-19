@@ -14,9 +14,17 @@ in the client directory<br /><br />
 
 ### `npm install react-router-dom`
 
-### `npm install react-calendar`
+<br />
 
-<br /><br />
+### `react-calendar`
+
+is no longer needed, so you can do 
+
+### `npm uninstall react-calendar`
+
+to remove the package.
+
+<br />
 
 
 In the project directory, you can run:
