@@ -36,10 +36,10 @@ router.route('/delete/:id').delete((req, res) => {
         .catch(err => res.status(400).json('Error: ' + err));
 })
 
-//delete bu event id
+//delete by event id
 
 router.route('/search').get(async (req, res) => {
-    const event = await Event.find({eventname: "lol"})
+    const event = await Event.find({eventname: req.body.eventname})
     if (!event){
         return res.status(400).json('Event not found.')
     }
@@ -47,6 +47,47 @@ router.route('/search').get(async (req, res) => {
 })
 
 //search by eventname
+
+//Update event: No need to send all the fields, only those that need to be updated
+
+router.route('/update/:id').post(async (req, res) => {
+    const {
+        sdate,
+        stime,
+        edate,
+        etime,
+        eventname,
+        username
+    } = req.body;
+    
+    const eventFields= {};
+    eventFields.id = req.params.id;
+    if (sdate) eventFields.sdate = sdate.trim();
+    if (stime) eventFields.stime = stime.trim();
+    if (edate) eventFields.edate = edate.trim();
+    if (etime) eventFields.etime = etime.trim();
+    if (eventname) eventFields.eventname = eventname.trim();
+    if (username) eventFields.username = username.trim();
+
+
+    let event = await Event.findById(req.params.id);
+    if (!event){
+        return res.status(400).json('No such event.')
+    }
+    try {
+        event = await Event.findByIdAndUpdate(
+            req.params.id,
+            {$set: eventFields},
+            {new: true}
+        );
+
+        return res.json("Event updated successfully");
+    }
+    catch (error) {
+        console.error(error.message);
+        res.status(500).send("Server Error");
+    } 
+})
 
 /*
 router.route('/:id').get((req, res) => {
