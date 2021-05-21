@@ -25,4 +25,38 @@ router.route('/delete/:id').delete((req, res) => {
         .catch(err => res.status(400).json('Error: ' + err));
 })
 
+//Update user: only send the fields that need to be updated
+
+router.route('/update/:id').post(async (req, res) => {
+    const {
+        username,
+        password
+    } = req.body;
+    
+    const userFields= {};
+    userFields.id = req.params.id;
+    if (username) userFields.username = username.trim();
+    if (password) userFields.password = password.trim();
+
+
+    let user = await User.findById(req.params.id);
+    if (!user){
+        return res.status(400).json('No such user.')
+    }
+    try {
+        user = await User.findByIdAndUpdate(
+            req.params.id,
+            {$set: userFields},
+            {new: true}
+        );
+
+        return res.json("User updated succesfully");
+    }
+    catch (error) {
+        console.error(error.message);
+        res.status(500).send("Server Error");
+    } 
+})
+
+
 module.exports = router;
