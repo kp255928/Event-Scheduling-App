@@ -8,14 +8,9 @@ http://localhost:9000/ for server
 need to type "npm install" in the project folder in the terminal when you first start this project
 
 
-when finished your work, remember to do the following so the teacher can see you contributing when grading:
-git add .
-git commit
-git push
 
-
-Database connection https://cloud.mongodb.com/v2/60978e5eefa688605caf032c#clusters (don't know how to share cluster yet)
-server/.env contains the key for using the database (might need to register ur own account)
+Database connection https://cloud.mongodb.com/v2/60978e5eefa688605caf032c#clusters 
+Share your email here so I can invite you to join the database.,
 
 
 TODO: create login page, create some buttons or something in the front end to let user create an event
