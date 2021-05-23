@@ -1,8 +1,15 @@
+import axios from 'axios';
 const eventList = document.getElementById('eventList');
 const searchBar = document.getElementById('searchBar');
 let hpEvents =[];
 console.log(searchBar);
 
+//get the event name from the database
+/*
+function getEvents(){
+    axios.get('http://localhost:9000/events/search', eventName);
+}
+*/
 searchBar.addEventListener('keyup', (e) => {
     const searchString = e.target.value.toLowerCase();
     console.log(searchString);
