@@ -19,3 +19,7 @@ create calander view.
 search function (search from the database, display it in frontend 
 
 
+Modules used:
+
+npm install mongoose
+npm install axios
