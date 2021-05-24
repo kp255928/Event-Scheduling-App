@@ -1,5 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import '../index.css';
+// import isLoggedIn from './LogIn';
 
 const Home = () => {
     useEffect(() => {
@@ -13,6 +14,8 @@ const Home = () => {
         {title: 'End-of-quarter LA feedback survey due', date:'June 4', discription:'End-of-quarter LA feedback survey due', id: 4}
 
     ]);
+
+    // console.log(props.isLoggedIn);
 
     return(
         <div className="home">

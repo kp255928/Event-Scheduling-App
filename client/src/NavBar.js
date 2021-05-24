@@ -9,7 +9,7 @@ const NavBar = () => {
             
             <div className="navlinks">
                 <Link to="/login" className="link">Log in</Link>
-                <Link to="/signup" className="link">Sign up</Link>
+                {/* <Link to="/signup" className="link">Sign up</Link> */}
                 <Link to="/create" className="link">Create events</Link>
                 {/* <Link to="/invite" className="link">Invite friends</Link> */}
             </div>
