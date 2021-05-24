@@ -1,6 +1,5 @@
 import React, {useEffect, useState} from 'react';
 import '../index.css';
-// import isLoggedIn from './LogIn';
 
 const Home = () => {
     useEffect(() => {
@@ -15,12 +14,19 @@ const Home = () => {
 
     ]);
 
-    // console.log(props.isLoggedIn);
+    // console.log(global.isLoggedIn);
+    let message;
+    if (! global.isLoggedIn) {
+        message = "Log in please";
+    } else {
+        message = "Hello guys! This is the new view of our calendar home and here are some upcoming events";
+    }
 
     return(
+    
         <div className="home">
-            <h2 className="home-message">Hello guys! This is the new view of our calendar home</h2>
-            <h2 className="home-message">and here are some upcoming events</h2>
+            <h2 className="home-message">{message}</h2>
+            {/* <h2 className="home-message">and here are some upcoming events</h2> */}
             {events.map((event) =>(
                 <div className="event-preview" key={event.id}>
                     <h2>{ event.title }</h2>

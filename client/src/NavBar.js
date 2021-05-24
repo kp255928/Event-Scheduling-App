@@ -3,10 +3,11 @@ import { Link } from 'react-router-dom';
 import './index.css';
 
 const NavBar = () => {
+    
+
     return(
         <nav className="navbar">
-            <Link to="/" className="icon">Calendar App</Link>
-            
+            <Link to="/" className="icon">Calendar App</Link>       
             <div className="navlinks">
                 <Link to="/login" className="link">Log in</Link>
                 {/* <Link to="/signup" className="link">Sign up</Link> */}

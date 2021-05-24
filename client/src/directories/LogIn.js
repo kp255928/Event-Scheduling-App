@@ -2,7 +2,8 @@ import React, { useState, useEffect } from "react";
 import { Link, useHistory } from 'react-router-dom';
 import '../index.css';
 
-// let isLoggedIn = false;
+
+global.isLoggedIn = false;
 
 const Login = () => {
     useEffect(() => {
@@ -11,19 +12,19 @@ const Login = () => {
 
     const [username, setName] = useState('');
     const [password, setPassword] = useState('');
-    const [isLoggedIn, setLoggedIn] = useState(false);
+    // const [isLoggedIn, setLoggedIn] = useState(false);
     const history = useHistory();
 
     const handleButton = (e) => {
         if (username !== '' && password !== '') {
-            setLoggedIn(true);
-            isLoggedIn = true;
+            // setLoggedIn(true);
+            global.isLoggedIn = true;
             e.preventDefault();
             history.push('/');
         }
-        console.log(isLoggedIn);
+        // console.log(isLoggedIn);
     }
-
+    
     return(
         <div className="login">
             <div className="userform">

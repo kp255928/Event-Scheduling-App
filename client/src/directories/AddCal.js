@@ -9,8 +9,8 @@ const AddCalendar = () => {
     const [event, setEvent] = useState('');
 
     return(
-        <div classname="createevent">
-            <div classname="eventform">
+        <div className="createevent">
+            <div className="eventform">
                 <label>Create an event</label>
                 <form>
                     <label>Month</label>
