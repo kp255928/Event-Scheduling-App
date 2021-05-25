@@ -18,7 +18,7 @@ searchBar.addEventListener('keyup', (e) => {
 
 const loadEvents = async() => {
     try {
-        const res =await fetch(''); //add address of eventlist in ''
+        const res =await fetch('http://localhost:3000'); //add address of eventlist in ''
         hpEvents = await res.json();
         displayEvents(hpEvents);
         console.log(hpEvents);
