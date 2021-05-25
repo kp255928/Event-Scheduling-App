@@ -8,10 +8,12 @@ import Login from './directories/LogIn';
 import SignUp from './directories/SignUp';
 
 class App extends React.Component {//newly created function
+    
     constructor(props) {
         super(props);
         this.state = {apiResponse:""};
     }
+   
     callAPI() {
         fetch("http://localhost:9000") //fetch from backend
             .then(res => res.text())

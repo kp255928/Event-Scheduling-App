@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from "react";
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import '../index.css';
+
+
+global.isLoggedIn = false;
 
 const Login = () => {
     useEffect(() => {
@@ -9,7 +12,19 @@ const Login = () => {
 
     const [username, setName] = useState('');
     const [password, setPassword] = useState('');
+    // const [isLoggedIn, setLoggedIn] = useState(false);
+    const history = useHistory();
 
+    const handleButton = (e) => {
+        if (username !== '' && password !== '') {
+            // setLoggedIn(true);
+            global.isLoggedIn = true;
+            e.preventDefault();
+            history.push('/');
+        }
+        // console.log(isLoggedIn);
+    }
+    
     return(
         <div className="login">
             <div className="userform">
@@ -31,7 +46,7 @@ const Login = () => {
                     onChange={ (e) => setPassword(e.target.value) }
                     placeholder="Password"
                 />
-                <button>Log In</button>
+                <button onClick={handleButton}>Log In</button>
             </form>
             </div>
             <div className="accountaction">
