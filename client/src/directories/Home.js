@@ -1,5 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import '../index.css';
+import logincontrol from "../LoginControl";
 
 const Home = () => {
     useEffect(() => {
@@ -14,9 +15,8 @@ const Home = () => {
 
     ]);
 
-    // console.log(global.isLoggedIn);
     let message;
-    if (! global.isLoggedIn) {
+    if (! logincontrol.isLoggedIn()) {
         message = "Log in please";
     } else {
         message = "Hello guys! This is the new view of our calendar home and here are some upcoming events";
