@@ -1,19 +1,27 @@
 import React, {useEffect, useState} from 'react';
+import DatePicker from 'react-date-picker';
 import '../index.css';
 
 const AddCalendar = () => {
     useEffect(() => {
         document.title = 'Create Event';
     });
-
+    const [startDate, setStartDate] = useState(new Date());
     const [event, setEvent] = useState('');
 
     return(
         <div className="createevent">
             <div className="eventform">
                 <label>Create an event</label>
+                <h2>Pick a date</h2>
+                <DatePicker 
+                    value={ startDate } 
+                    onChange={ setStartDate } 
+                    required
+                    minDate={startDate}
+                 />
                 <form>
-                    <label>Month</label>
+                    {/* <label>Month</label>
                     <select required>
                         <option defaultValue="0" selected disabled>Select one</option>
                         <option value="1">January</option>
@@ -28,7 +36,8 @@ const AddCalendar = () => {
                         <option value="10">October</option>
                         <option value="11">November</option>
                         <option value="12">December</option>
-                    </select>
+                    </select> */}
+
                 </form>
             </div>
         </div>
