@@ -1,6 +1,6 @@
 const router = require('express').Router();
 let Event = require('../datamodel/events');
-//let User = require('../datamodel/user');
+let User = require('../datamodel/user');
 //var request = requrire('request');
 
 
@@ -52,6 +52,7 @@ router.route('/search').get(async (req, res) => {
 
 //search by eventname
 //request
+/*
 router.route('/request').post(async(req, res)=>{
     const event = await Event.find({eventname: req.body.eventname})
     const requestuser = await User.find({username: req.body.username})
@@ -61,11 +62,10 @@ router.route('/request').post(async(req, res)=>{
     if (!event){
         return res.status(400).json('Event not found.')
     }
-    res.repond(sendrequest(Event.username, requestname, event));
+    res.repond(sendrequest(Event.username, requestuser, event));
 }
 function sendrequest(from, to, eventrequest){
-    $.post("/request", {from:from, to:to},function(data) {
-        
+    $.post("/request", {from:from, to:to},function(data){
     })
 }
 
