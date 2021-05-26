@@ -14,17 +14,11 @@ in the client directory<br /><br />
 
 ### `npm install react-router-dom`
 
+### `npm install react-date-picker`
+
 <br />
 
-DO THIS ONLY IF YOU ALREADY INSTALLED react-calendar
 
-### `react-calendar`
-
-is no longer needed, so you can do 
-
-### `npm uninstall react-calendar`
-
-to remove the package.
 
 <br />
 
