@@ -186,6 +186,14 @@
   margin-top: auto;
 }
 
+.eventform {
+  display: block;
+  text-align: center;
+  margin: auto;
+  padding: 10px;
+  align-items: center;
+}
+
 /* Others */
 .greet {
   color: rgb(45,104,196);

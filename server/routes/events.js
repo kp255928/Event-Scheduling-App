@@ -1,5 +1,9 @@
 const router = require('express').Router();
 let Event = require('../datamodel/events');
+let User = require('../datamodel/user');
+//var request = requrire('request');
+
+
 
 router.route('/').get((req, res) => {
     Event.find()
@@ -47,7 +51,25 @@ router.route('/search').get(async (req, res) => {
 })
 
 //search by eventname
+//request
+/*
+router.route('/request').post(async(req, res)=>{
+    const event = await Event.find({eventname: req.body.eventname})
+    const requestuser = await User.find({username: req.body.username})
+    if(!requestuser){
+        return res.status(400).json('User not found.')
+    }
+    if (!event){
+        return res.status(400).json('Event not found.')
+    }
+    res.repond(sendrequest(Event.username, requestuser, event));
+}
+function sendrequest(from, to, eventrequest){
+    $.post("/request", {from:from, to:to},function(data){
+    })
+}
 
+//router.route('/respond').get((req,res)=>{})
 //Update event: No need to send all the fields, only those that need to be updated
 
 router.route('/update/:id').post(async (req, res) => {
@@ -80,7 +102,6 @@ router.route('/update/:id').post(async (req, res) => {
             {$set: eventFields},
             {new: true}
         );
-
         return res.json("Event updated successfully");
     }
     catch (error) {
@@ -90,6 +111,10 @@ router.route('/update/:id').post(async (req, res) => {
 })
 
 /*
+
+
+
+
 router.route('/:id').get((req, res) => {
     Event.findById(req.params.id)
         .then(exercise => res.json(exercise))

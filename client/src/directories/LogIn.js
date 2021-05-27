@@ -1,9 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Link, useHistory } from 'react-router-dom';
 import '../index.css';
-
-
-global.isLoggedIn = false;
+import logincontrol from "../LoginControl";
 
 const Login = () => {
     useEffect(() => {
@@ -18,11 +16,11 @@ const Login = () => {
     const handleButton = (e) => {
         if (username !== '' && password !== '') {
             // setLoggedIn(true);
-            global.isLoggedIn = true;
+            logincontrol.login();
             e.preventDefault();
             history.push('/');
+
         }
-        // console.log(isLoggedIn);
     }
     
     return(
