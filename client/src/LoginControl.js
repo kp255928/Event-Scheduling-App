@@ -21,6 +21,7 @@ class LoginControl {
     //maybe need to display a page that notify that user the account creation is a success/failure. And redirect them to the calender.
     RegisterUser(user) {
         console.log("1");
+        
         axios.post('http://localhost:9000/users/add', user)
         .then(res => console.log(res.data));
         //need to store this info into the passport
