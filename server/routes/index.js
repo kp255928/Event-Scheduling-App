@@ -9,13 +9,13 @@ const router = express.Router();
 router.get('/register',function(req, res){
     res.render('register.ejs')
 });
-router.post('/register', (req,res) =>{
+router.post('/register', (req,res, next) =>{
   passport.authenticate('register',{
     successRedirect: '/login',
     failureRedirect:'/register',
     failureFlash: true
-  })(req, res, next)
-})
+  })(req, res, next);
+});
 router.get('/login', function(req, res){
     res.render('login.ejs')
 });
