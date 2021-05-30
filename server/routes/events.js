@@ -70,6 +70,7 @@ function sendrequest(from, to, eventrequest){
 }
 
 //router.route('/respond').get((req,res)=>{})
+*/
 //Update event: No need to send all the fields, only those that need to be updated
 
 router.route('/update/:id').post(async (req, res) => {
