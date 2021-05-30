@@ -4,8 +4,7 @@ const searchBar = document.getElementById('searchBar');
 let hpEvents =[];
 console.log(searchBar);
 const event = {
-     //need to check if the event belong to the current searching user first
-    username: username, //grab the user name from the front end
+    username: username, //grab the user name from the front end (where is the username stored in the front end?)
     eventname: eventname, 
 }
 //get the event name from the database
