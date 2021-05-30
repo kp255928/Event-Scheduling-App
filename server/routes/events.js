@@ -43,8 +43,6 @@ router.route('/delete/:id').delete((req, res) => {
 //delete by event id
 
 router.route('/search').get(async (req, res) => {
-   
-    
     const event = await Event.find({eventname: req.body.eventname})
     if (!event){
         return res.status(400).json('Event not found.')
@@ -78,6 +76,7 @@ function sendrequest(from, to, eventrequest){
 }
 
 //router.route('/respond').get((req,res)=>{})
+*/
 //Update event: No need to send all the fields, only those that need to be updated
 
 router.route('/update/:id').post(async (req, res) => {
