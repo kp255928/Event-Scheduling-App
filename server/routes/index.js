@@ -14,12 +14,12 @@ router.post('/register', (req,res, next) =>{
     successRedirect: '/login',
     failureRedirect:'/register',
     failureFlash: true
-  })(req, res, next);
+  })
 });
 router.get('/login', function(req, res){
     res.render('login.ejs')
 });
-router.post('/login',
+router.post('/login', 
   passport.authenticate('login', {
     //successRedirect: '/',
     failureRedirect:'/login',

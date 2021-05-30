@@ -4,6 +4,7 @@ const User = require('../datamodel/user')
 const register = require('./register')
 module.exports = function(passport){
     register(passport);
+    
     passport.use('login', new localstrategy(
         {passReqToCallback: true},
         function(req, username, password, done){
