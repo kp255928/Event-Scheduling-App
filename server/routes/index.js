@@ -10,7 +10,7 @@ router.get('/register',(req, res) =>{
     res.render('register.ejs')
 });
 router.post('/register', (req, res) => {
-    passport.authenticate('register', {
+    passport.authenticate('local','register', {
       successRedirect:'/login',
       failureRedirect:'/register',
       failureFlash: true
