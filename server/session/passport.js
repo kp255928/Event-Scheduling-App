@@ -3,14 +3,6 @@ const bcrypt =require('bcrypt')
 const User = require('../datamodel/user')
 const register = require('./register')
 module.exports = function(passport){
-    passport.serializeUser(function(user, done){
-        done(null,user.id);
-    });
-    passport.deserializeUser(function(id,done){
-        User.findbyId(id,function(err,user){
-            done(err,user);
-        });
-    });
     register(passport);
     passport.use('login', new localstrategy(
         {passReqToCallback: true},
@@ -25,4 +17,12 @@ module.exports = function(passport){
             });
         }
     ));
+    passport.serializeUser(function(user, done){
+        done(null,user.id);
+    });
+    passport.deserializeUser(function(id,done){
+        User.findbyId(id,function(err,user){
+            done(err,user);
+        });
+    });
 }
