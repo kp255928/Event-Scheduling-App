@@ -11,6 +11,7 @@ module.exports = function(passport){
         });
     });
     passport.use('register',  new localstrategy(
+        {passReqToCallback: true},
         function(req, username, password, done){
             User.findOne({'username':username}),function(err, user){
                 if(err)
@@ -38,6 +39,7 @@ module.exports = function(passport){
         }  
     ));
     passport.use('login', new localstrategy(
+        {passReqToCallback: true},
         function(req, username, password, done){
             User.findOne({'username': username}).then(user =>{
                 if(!user) return done(null, false, req.flash('message','This username is not registered'));

@@ -10,16 +10,12 @@ const router = express.Router();
 router.get('/register',(req, res) =>{
     res.render('register.ejs')
 });
-router.post('/register', checknotau, async(req, res) => {
-  const newUser = new User();
-  newUser.username = username;
-  newUser.password = password;
-  bcrpyt.genSalt(10,(err,salt)=>{
-      bcrpyt.hash(newUser.password, salt, (err,hash)=>{
-          newUser.password = hash; 
-      });    
-  });
-  res.redirct('/login')
+router.post('/register', async(req, res) => {
+  passport.authenticate('login', {
+    successRedirect: '/login',
+    failureRedirect:'/register',
+    failureFlash: true
+  })
 });
 router.get('/login', (req, res) => {
     res.render('login.ejs')
@@ -50,3 +46,15 @@ function checknotau(req,res, next){
   next()
 }
 module.exports = router;
+
+/*
+const newUser = new User();
+  newUser.username = req.body.username;
+  newUser.password = req.body.password;
+  bcrpyt.genSalt(10,(err,salt)=>{
+      bcrpyt.hash(newUser.password, salt, (err,hash)=>{
+          newUser.password = hash; 
+      });
+  });
+  res.redirct('/login')
+  */
