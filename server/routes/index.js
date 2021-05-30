@@ -1,8 +1,7 @@
-const express = require('express');
+const express = require('express')
 const passport = require('passport')
 const Event = require('../datamodel/events')
 const User = require('../datamodel/user')
-const bcrypt = require('bcrypt')
 const router = express.Router();
 // login and re
 // router.set('view-engine', 'ejs');
@@ -10,13 +9,13 @@ const router = express.Router();
 router.get('/register',(req, res) =>{
     res.render('register.ejs')
 });
-router.post('/register', async(req, res) => {
-  passport.authenticate('login', {
+router.post('/register',
+  passport.authenticate('register', {
     successRedirect: '/login',
     failureRedirect:'/register',
     failureFlash: true
   })
-});
+);
 router.get('/login', (req, res) => {
     res.render('login.ejs')
 });
