@@ -43,8 +43,6 @@ router.route('/delete/:id').delete((req, res) => {
 //delete by event id
 
 router.route('/search').get(async (req, res) => {
-   
-    
     const event = await Event.find({eventname: req.body.eventname})
     if (!event){
         return res.status(400).json('Event not found.')
