@@ -15,6 +15,7 @@ const Home = () => {
 
     ]);
 
+    // console.log(global.isLoggedIn);
     let message;
     if (! logincontrol.isLoggedIn()) {
         message = "Log in please";

@@ -1,11 +1,13 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import NavBar from './NavBar';
-import AddCalendar from './directories/AddCal';
+//import AddCalendar from './directories/AddCal';
 import Home from './directories/Home';
 import Invite from './directories/Invite';
 import Login from './directories/LogIn';
 import SignUp from './directories/SignUp';
+import Calendar from 'react-calendar';
+
 
 class App extends React.Component {//newly created function
     
@@ -42,7 +44,7 @@ class App extends React.Component {//newly created function
                 <SignUp />
               </Route>
               <Route exact path="/create">
-                <AddCalendar />
+                <Calendar />
               </Route>
               <Route exact path="/invite">
                 <Invite />

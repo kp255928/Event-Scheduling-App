@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+/*import React, {useEffect, useState} from 'react';
 import DatePicker from 'react-date-picker';
 import '../index.css';
 
@@ -36,11 +36,11 @@ const AddCalendar = () => {
                         <option value="10">October</option>
                         <option value="11">November</option>
                         <option value="12">December</option>
-                    </select> */}
+                    </select> *}
 
                 </form>
             </div>
         </div>
     );
 }
-export default AddCalendar;
+export default AddCalendar;*/
