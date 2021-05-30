@@ -3,10 +3,14 @@ var router = express.Router();
 let User = require("../datamodel/user");
 
 
-router.route('/').get((req, res) => {
-    User.find() //find users from the db
-        .then(users => res.json(users))
-        .catch(err => res.status(400).json('Error: ' + err));
+router.route('/search').get(async (req, res) => {
+    const user = await User.find({username: req.body.username})
+    if (!user){
+        return res.status(400).json('User not found.')
+    }
+    else{
+        return res.json(user)
+    }
 });
 
 router.route('/add').post((req, res) => {
