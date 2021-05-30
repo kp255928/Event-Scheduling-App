@@ -38,5 +38,4 @@ router.get('/index', (req,res)=> {
 });
 // about events: add, search( by event name), update event, delete event
 
-
 module.exports = router;
