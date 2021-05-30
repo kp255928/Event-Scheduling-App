@@ -4,7 +4,7 @@ let User = require("../datamodel/user");
 
 
 router.route('/search').get(async (req, res) => {
-    const user = await Event.find({eventname: req.body.eventname})
+    const user = await Event.find({username: req.body.username})
     if (!user){
         return res.status(400).json('User not found.')
     }
