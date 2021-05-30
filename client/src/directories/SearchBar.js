@@ -3,13 +3,23 @@ const eventList = document.getElementById('eventList');
 const searchBar = document.getElementById('searchBar');
 let hpEvents =[];
 console.log(searchBar);
-
-//get the event name from the database
-/*
-function getEvents(){
-    axios.get('http://localhost:9000/events/search', eventName);
+const event = {
+    username: username, //grab the user name from the front end (where is the username stored in the front end?)
+    eventname: eventname, 
 }
-*/
+//get the event name from the database
+
+function getEvents(){
+    try {
+        //successfully grab event
+        returned_event = axios.get('http://localhost:9000/events/search', event);
+      }
+      catch(err) {
+        //display mesage in front end that no event exists for the user
+      }
+
+}
+
 searchBar.addEventListener('keyup', (e) => {
     const searchString = e.target.value.toLowerCase();
     console.log(searchString);

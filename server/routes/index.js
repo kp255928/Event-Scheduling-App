@@ -2,6 +2,7 @@ const express = require('express');
 const passport = require('passport')
 const Event = require('../datamodel/events')
 const User = require('../datamodel/user')
+const bcrypt = require('bcrypt')
 const router = express.Router();
 // login and re
 // router.set('view-engine', 'ejs');
@@ -9,12 +10,16 @@ const router = express.Router();
 router.get('/register',(req, res) =>{
     res.render('register.ejs')
 });
-router.post('/register', (req, res) => {
-    passport.authenticate('register', {
-      successRedirect:'/login',
-      failureRedirect:'/register',
-      failureFlash: true
-    })
+router.post('/register', checknotau, async(req, res) => {
+  const newUser = new User();
+  newUser.username = username;
+  newUser.password = password;
+  bcrpyt.genSalt(10,(err,salt)=>{
+      bcrpyt.hash(newUser.password, salt, (err,hash)=>{
+          newUser.password = hash; 
+      });    
+  });
+  res.redirct('/login')
 });
 router.get('/login', (req, res) => {
     res.render('login.ejs')
@@ -32,11 +37,16 @@ router.delete('/logout', (req,res) =>{
     res.redirect('/login')
 });
 
-router.get('/index', (req,res)=> {
+router.get('/', (req,res)=> {
   res.render('index.ejs', {
     user: req.user});
 });
 // about events: add, search( by event name), update event, delete event
 
-
+function checknotau(req,res, next){
+  if(req.isAuthenticated()){
+    return res.redirect('/')
+  }
+  next()
+}
 module.exports = router;
