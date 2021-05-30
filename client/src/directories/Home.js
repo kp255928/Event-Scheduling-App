@@ -1,4 +1,6 @@
+import axios from 'axios';
 import React, {useEffect, useState} from 'react';
+import { Component } from 'react';
 import '../index.css';
 import logincontrol from "../LoginControl";
 
@@ -21,6 +23,22 @@ const Home = () => {
         message = "Log in please";
     } else {
         message = "Hello guys! This is the new view of our calendar home and here are some upcoming events";
+    }
+
+    function componentDidMount() {
+        const config = {
+            headers: {
+                Authorization: '' + localStorage.getItem('token')
+            }
+        };
+        axios.get('user', config).then(
+            res => {
+                console.log(res)
+            },
+            err => {
+                console.log(err)
+            }
+        )
     }
 
     return(

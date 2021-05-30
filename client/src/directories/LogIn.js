@@ -12,14 +12,14 @@ const Login = () => {
     const [password, setPassword] = useState('');
     // const [isLoggedIn, setLoggedIn] = useState(false);
     const history = useHistory();
+    const user = [username, password]
 
     const handleButton = (e) => {
         if (username !== '' && password !== '') {
             // setLoggedIn(true);
-            logincontrol.login();
+            logincontrol.checkRegister(user);
             e.preventDefault();
             history.push('/');
-
         }
     }
     
