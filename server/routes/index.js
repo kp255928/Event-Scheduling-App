@@ -6,17 +6,17 @@ const router = express.Router();
 // login and re
 // router.set('view-engine', 'ejs');
 
-router.get('/register',(req, res) =>{
+router.get('/register',function(req, res){
     res.render('register.ejs')
 });
 router.post('/register',
-  passport.authenticate('register', {
+  passport.authenticate('register',{
     successRedirect: '/login',
     failureRedirect:'/register',
     failureFlash: true
-  })
+  })(req, res, next)
 );
-router.get('/login', (req, res) => {
+router.get('/login', function(req, res){
     res.render('login.ejs')
 });
 router.post('/login',async (req,res) => {
