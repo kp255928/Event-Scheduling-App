@@ -5,6 +5,7 @@ class LoginControl {
         this.LoggedIn = false;
         this.username = ''; // get this information from login, still working on it
     }
+    
 
     getUsername() {
         return this.username;
@@ -25,8 +26,7 @@ class LoginControl {
     //put the newly register user password and username into the database.
     //maybe need to display a page that notify that user the account creation is a success/failure. And redirect them to the calender.
     RegisterUser(user) {
-        console.log("1");
-        
+  
         axios.post('http://localhost:9000/users/add', user)
         .then(res => console.log(res.data));
         //need to store this info into the passport
@@ -36,13 +36,12 @@ class LoginControl {
      * CHECK IF A LOGIN IS REGISTERED
      ***********************************************/
     checkRegister(user) {
-        console.log("2");
+        console.log(user);
 
         /***********************************************
          * NEED TO BE FIXED WITH URL I THINK
          ***********************************************/
-        axios.post('http://localhost:9000/users', user)
-        
+        this.user = axios.get('http://localhost:9000/users/search', user)
         /***********************************************
          * THROW A TOKEN TO CHECK IF LOGIN SUCCESSFULLY
          ***********************************************/
