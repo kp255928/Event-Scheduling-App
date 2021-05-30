@@ -4,6 +4,8 @@ const User = require('../datamodel/user')
 
 module.exports=function(passport){
     passport.use('register',  new localstrategy(
+        {usernameField : 'username'},
+        {passwordField : 'password'},
         {passReqToCallback: true},
         function(req, username, password, done){
             User.findOne({'username':username}),function(err, user){
