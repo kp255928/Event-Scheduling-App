@@ -1,10 +1,12 @@
 import axios from 'axios';
+import logincontrol from '../LoginControl'
+
 const eventList = document.getElementById('eventList');
 const searchBar = document.getElementById('searchBar');
 let hpEvents =[];
 console.log(searchBar);
 const event = {
-    username: username, //grab the user name from the front end (where is the username stored in the front end?)
+    username: logincontrol.getUsername(), //grab the user name from the front end (where is the username stored in the front end?)
     eventname: eventname, 
 }
 //get the event name from the database

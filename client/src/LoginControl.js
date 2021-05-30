@@ -3,6 +3,11 @@ import axios from "axios";
 class LoginControl {
     constructor() {
         this.LoggedIn = false;
+        this.username = ''; // get this information from login, still working on it
+    }
+
+    getUsername() {
+        return this.username;
     }
 
     login() {
@@ -39,7 +44,7 @@ class LoginControl {
         axios.post('http://localhost:9000/users', user)
         
         /***********************************************
-         * THROW A TOKEN TO CHECK IF LOGIN SUCCESULLY
+         * THROW A TOKEN TO CHECK IF LOGIN SUCCESSFULLY
          ***********************************************/
         .then (res => localStorage.setItem('token', res.user.token))
         .catch (err => console.log(err))
