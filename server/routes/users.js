@@ -2,7 +2,7 @@ var express = require('express');
 const { rawListeners } = require('../datamodel/user');
 var router = express.Router(); 
 let User = require("../datamodel/user");
-
+const bcrypt = require('bcryptjs')
 
 router.route('/search').get(async (req, res) => {
     const username = req.body.username;
@@ -29,8 +29,9 @@ router.route('/search').get(async (req, res) => {
         }
     }
 });
-
+/*
 router.route('/add').post((req, res) => {
+    console.log("ss")
     const username = req.body.username;
     const password = req.body.password;
     const newUser = new User({ username,password }); //database call
@@ -40,6 +41,33 @@ router.route('/add').post((req, res) => {
         .catch(err => res.status(400).json('Error: ' + err));
 });
 
+*/
+router.route('/register').post((req, res) =>{
+    console.log("s")
+    var username = req.body.username;
+    var password = req.body.password;
+    if (password.length<4) return res.status(400).json('password mush be larger than 4')
+    User.findOne({'username':username}).then(user =>{
+      if(user) return res.status(400).json('username taken')
+      else{
+        const newUser = new User({
+          username,
+          password
+        });
+        bcrypt.genSalt(10,(err,salt)=>{
+          bcrypt.hash(newUser.password, salt, (err,hash)=>{
+            if(err) throw errr;
+            newUser.password = hash;
+            newUser.save().then(user=>{
+              req.flash('success','signuped');
+              res.redirect('/login')
+            })
+            .catch(err=>console.log("failed"));
+          });    
+        });
+      }
+    });
+  });
 router.route('/delete/:id').delete((req, res) => {
     User.findByIdAndDelete(req.params.id)
         .then(() => res.json('User removed.'))

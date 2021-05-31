@@ -15,6 +15,13 @@ const userSchema = new Schema({
         //unique: true, //passwords doesn't have to be unique?
         required: true
     },
+    sentRequest:[{
+        username: {type: String, default: ''}
+    }],
+    request: [{
+        userId: {type: mongoose.Schema.Types.ObjectId, ref: 'User'},
+        username: {type: String, default: ''}
+    }],
 }, {
         timestamps: true,
 

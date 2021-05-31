@@ -1,7 +1,7 @@
 const express = require('express')
 const passport = require('passport')
 const Event = require('../datamodel/events')
-const User = require('../datamodel/user')
+let User = require('../datamodel/user')
 const bcrypt = require('bcryptjs')
 const router = express.Router();
 // login and re
@@ -18,7 +18,9 @@ router.post('/register',
   })
 );
 */
-router.post('/register', (req,res) =>{
+
+router.route('/register').post((req, res) =>{
+  console.log("s")
   var username = req.body.username;
   var password = req.body.password;
   if (password.length<4) return res.status(400).json('password mush be larger than 4')
@@ -43,6 +45,9 @@ router.post('/register', (req,res) =>{
     }
   });
 });
+
+
+
 router.get('/login', function(req, res){
   res.render('login.ejs')
 });
