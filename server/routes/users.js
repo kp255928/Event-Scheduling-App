@@ -29,6 +29,19 @@ router.route('/search').get(async (req, res) => {
         }
     }
 });
+router.post('/search_user_to_invite', function(req, res){
+    var user_to_invite = req.body.user_to_invite;
+    if (user_to_invite == req.body.username) {
+        user_to_invite= null;
+    }
+    User.find({username: user_to_invite}, function(err, result) {
+        if (err) throw err;
+        res.render('search', {
+        result: result
+    });
+    });
+    });
+
 /*
 router.route('/add').post((req, res) => {
     console.log("ss")
