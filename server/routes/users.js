@@ -2,12 +2,49 @@ var express = require('express');
 const { rawListeners } = require('../datamodel/user');
 var router = express.Router(); 
 let User = require("../datamodel/user");
-const bcrypt = require("bcryptjs")
+const bcrypt = require('bcryptjs')
 const passport = require("passport")
 
-router.get('/register',function(req, res){
-    res.render('register.ejs')
+router.route('/search').get(async (req, res) => {
+    const username = req.body.username;
+    console.log(username)
+    let user = await User.findOne({username: req.body.username})
+    if (user == null){
+        return res.status(400).json('User not founds.')
+    }
+    // if the request has password in it (such as for login verification), this verifies password. Otherwise, it returns user as is.
+    else{
+        if(req.body.password){
+            if(req.body.password !== user.password)
+            {
+                return res.status(400).json('Password Mismatch')
+            }
+            else{
+                return res.json(user)
+            }
+        }
+        else{
+        console.log(user)
+        return res.json(user)
+        
+        }
+    }
 });
+/*
+router.route('/add').post((req, res) => {
+    console.log("ss")
+    const username = req.body.username;
+    const password = req.body.password;
+    const newUser = new User({ username,password }); //database call
+
+    newUser.save()
+        .then(() => res.json('User added!'))
+        .catch(err => res.status(400).json('Error: ' + err));
+});
+
+*/
+
+
 
 router.route('/register').post((req,res) =>{
     const username = req.body.username;
@@ -50,43 +87,6 @@ router.route('/register').post((req,res) =>{
         });
     })
   });
-
-router.route('/search').get(async (req, res) => {
-    const username = req.body.username;
-    console.log(username)
-    let user = await User.findOne({username: req.body.username})
-    if (user == null){
-        return res.status(400).json('User not founds.')
-    }
-    // if the request has password in it (such as for login verification), this verifies password. Otherwise, it returns user as is.
-    else{
-        if(req.body.password){
-            if(req.body.password !== user.password)
-            {
-                return res.status(400).json('Password Mismatch')
-            }
-            else{
-                return res.json(user)
-            }
-        }
-        else{
-        console.log(user)
-        return res.json(user)
-        
-        }
-    }
-});
-
-router.route('/add').post((req, res) => {
-    const username = req.body.username;
-    const password = req.body.password;
-    const newUser = new User({ username,password }); //database call
-
-    newUser.save()
-        .then(() => res.json('User added!'))
-        .catch(err => res.status(400).json('Error: ' + err));
-});
-
 router.route('/delete/:id').delete((req, res) => {
     User.findByIdAndDelete(req.params.id)
         .then(() => res.json('User removed.'))
