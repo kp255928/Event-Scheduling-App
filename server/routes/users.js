@@ -2,7 +2,54 @@ var express = require('express');
 const { rawListeners } = require('../datamodel/user');
 var router = express.Router(); 
 let User = require("../datamodel/user");
+const bcrypt = require("bcryptjs")
+const passport = require("passport")
 
+router.get('/register',function(req, res){
+    res.render('register.ejs')
+});
+
+router.route('/register').post((req,res) =>{
+    const username = req.body.username;
+    const password = req.body.password;
+    if (password.length<4) return res.status(400).json('password mush be larger than 4')
+    User.findOne({'username':username}).then(user =>{
+      if(user) return res.status(400).json('username taken')
+      else{
+        const newUser = new User({
+          username,
+          password
+        });
+        bcrypt.genSalt(10,(err,salt)=>{
+          bcrypt.hash(newUser.password, salt, (err,hash)=>{
+            if(err) throw errr;
+            newUser.password = hash;
+            newUser.save().then(user=>{
+              req.flash('success','signuped');
+              res.redirect('/login')
+            })
+            .catch(err)
+          });    
+        });
+      }
+    });
+  });
+
+  router.route('/login').post((req,res)=>{
+    const username = req.body.username;
+    const password = req.body.password;
+    User.findOne({'username': username}).then(user=>{
+        if(!user) return res.status(400).json('username not existed')
+        bcrypt.compare(password, user.password, (err, isMatch)=>{
+            if(error) throw err;
+            if(!isMatch) return res.status(400).json('message', 'incorrect password')
+            else {
+                req.flash('success','login') 
+                res.redirect('/')
+            }
+        });
+    })
+  });
 
 router.route('/search').get(async (req, res) => {
     const username = req.body.username;
