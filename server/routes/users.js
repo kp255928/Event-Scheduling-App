@@ -5,9 +5,11 @@ let User = require("../datamodel/user");
 
 
 router.route('/search').get(async (req, res) => {
-    const user = await User.findOne({username: req.body.username})
-    if (!user){
-        return res.status(400).json('User not found.')
+    const username = req.body.username;
+    console.log(username)
+    let user = await User.findOne({username: req.body.username})
+    if (user == null){
+        return res.status(400).json('User not founds.')
     }
     // if the request has password in it (such as for login verification), this verifies password. Otherwise, it returns user as is.
     else{
@@ -21,7 +23,9 @@ router.route('/search').get(async (req, res) => {
             }
         }
         else{
+        console.log(user)
         return res.json(user)
+        
         }
     }
 });

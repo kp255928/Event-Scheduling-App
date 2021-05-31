@@ -9,6 +9,7 @@ const router = express.Router();
 router.get('/register',function(req, res){
     res.render('register.ejs')
 });
+
 router.post('/register', (req,res, next) =>{
   passport.authenticate('register',{
     successRedirect: '/login',
@@ -16,16 +17,9 @@ router.post('/register', (req,res, next) =>{
     failureFlash: true
   })
 });
-router.get('/login', function(req, res){
-    res.render('login.ejs')
-});
-router.post('/login', 
-  passport.authenticate('login', {
-    //successRedirect: '/',
-    failureRedirect:'/login',
-    failureFlash: true
-  })
-);
+
+
+
 
 router.delete('/logout', (req,res) =>{
     req.logOut()

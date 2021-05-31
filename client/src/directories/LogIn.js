@@ -11,8 +11,9 @@ const Login = () => {
     const [username, setName] = useState('');
     const [password, setPassword] = useState('');
     // const [isLoggedIn, setLoggedIn] = useState(false);
+    const user = [password,username]
     const history = useHistory();
-    const user = [username, password]
+    
 
     const handleButton = (e) => {
         if (username !== '' && password !== '') {

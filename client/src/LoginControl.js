@@ -36,17 +36,22 @@ class LoginControl {
      * CHECK IF A LOGIN IS REGISTERED
      ***********************************************/
     checkRegister(user) {
-        console.log(user);
-
-        /***********************************************
-         * NEED TO BE FIXED WITH URL I THINK
-         ***********************************************/
-        this.user = axios.get('http://localhost:9000/users/search', user)
+        console.log(user)
+        const user_object = {
+            username: user[0],
+            password: user[1],
+        }
+        console.log(user_object)
+        let returned = axios.get('http://localhost:9000/users/search', user_object)
         /***********************************************
          * THROW A TOKEN TO CHECK IF LOGIN SUCCESSFULLY
          ***********************************************/
+        .then (res => console.log(res.data))
         .then (res => localStorage.setItem('token', res.user.token))
         .catch (err => console.log(err))
+        this.username = returned.username
+        console.log(returned.username)
+        
     }
 
 
