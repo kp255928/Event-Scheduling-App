@@ -3,6 +3,7 @@ const { rawListeners } = require('../datamodel/user');
 var router = express.Router(); 
 let User = require("../datamodel/user");
 const bcrypt = require('bcryptjs')
+const passport = require("passport")
 
 router.route('/search').get(async (req, res) => {
     const username = req.body.username;
@@ -55,10 +56,12 @@ router.route('/add').post((req, res) => {
 });
 
 */
-router.route('/register').post((req, res) =>{
-    console.log("s")
-    var username = req.body.username;
-    var password = req.body.password;
+
+
+
+router.route('/register').post((req,res) =>{
+    const username = req.body.username;
+    const password = req.body.password;
     if (password.length<4) return res.status(400).json('password mush be larger than 4')
     User.findOne({'username':username}).then(user =>{
       if(user) return res.status(400).json('username taken')
@@ -75,11 +78,27 @@ router.route('/register').post((req, res) =>{
               req.flash('success','signuped');
               res.redirect('/login')
             })
-            .catch(err=>console.log("failed"));
+            .catch(err)
           });    
         });
       }
     });
+  });
+
+  router.route('/login').post((req,res)=>{
+    const username = req.body.username;
+    const password = req.body.password;
+    User.findOne({'username': username}).then(user=>{
+        if(!user) return res.status(400).json('username not existed')
+        bcrypt.compare(password, user.password, (err, isMatch)=>{
+            if(error) throw err;
+            if(!isMatch) return res.status(400).json('message', 'incorrect password')
+            else {
+                req.flash('success','login') 
+                res.redirect('/')
+            }
+        });
+    })
   });
 router.route('/delete/:id').delete((req, res) => {
     User.findByIdAndDelete(req.params.id)
