@@ -1,15 +1,28 @@
 var express = require('express');
+const { rawListeners } = require('../datamodel/user');
 var router = express.Router(); 
 let User = require("../datamodel/user");
 
 
 router.route('/search').get(async (req, res) => {
-    const user = await User.find({username: req.body.username})
+    const user = await User.findOne({username: req.body.username})
     if (!user){
         return res.status(400).json('User not found.')
     }
+    // if the request has password in it (such as for login verification), this verifies password. Otherwise, it returns user as is.
     else{
+        if(req.body.password){
+            if(req.body.password !== user.password)
+            {
+                return res.status(400).json('Password Mismatch')
+            }
+            else{
+                return res.json(user)
+            }
+        }
+        else{
         return res.json(user)
+        }
     }
 });
 
