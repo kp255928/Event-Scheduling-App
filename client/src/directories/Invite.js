@@ -2,7 +2,7 @@ import React, {useEffect} from 'react';
 import '../index.css';
 import axios from "axios";
 
-var socket = io();
+//var socket = io();
 
 
 const Invite = () => {
