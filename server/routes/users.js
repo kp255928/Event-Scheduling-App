@@ -30,20 +30,119 @@ router.route('/search').get(async (req, res) => {
         }
     }
 });
-router.post('/search_user_to_invite', function(req, res){
-    var user_to_invite = req.body.user_to_invite;
-    if (user_to_invite == req.body.username) {
-        user_to_invite= null;
-    }
-    User.find({username: user_to_invite}, function(err, result) {
-        if (err) throw err;
-        res.render('search', {
-        result: result
-    });
-    });
-    });
+router.route('/search_user_to_invite').post(async (req, res) => {
+    const {
+        user_to_invite,
+        username,
+        event
+    } = req.body;
+    const userFields= {};
+    if (user_to_invite == req.body.username) { //cannot invite themselves
+        user_to_invite = null;
+    }else{
 
-/*
+    
+        let user = await User.findOne({username: req.body.user_to_invite})
+        if (user == null){
+            return res.status(400).json('Cannot Invite: Cannot find the required user in the database')
+        }
+        else{
+            userFields.id = user._id
+            //if (user_to_invite) userFields.requests_sent_to = user_to_invite.trim();
+            if (username) userFields.request_received_from = username.trim();
+            if (event) userFields.request_event = event.trim();
+            if(req.body.username && req.body.event){
+                user = await User.findByIdAndUpdate(
+                    userFields.id,
+                    {$set: userFields},
+                    {new: true}
+                );
+                let current_user = await User.findOne({username: req.body.username})
+                if(current_user){
+                    const changeFields= {};
+                    changeFields.requests_sent_to = user_to_invite.trim();
+                    current_user = await User.findByIdAndUpdate(
+                        current_user._id,
+                        {$set: changeFields},
+                        {new: true}
+                    );
+                }
+                return res.json("User invited");
+            }
+            
+            else{
+                return res.status(400).json('the requster or the event to request is empty')
+        
+            }
+        }
+    }
+
+});
+
+router.route('/check_if_being_requested').get(async (req, res) => {
+    let user = await User.findOne({username: req.body.username})
+    if (user == null){
+        return res.status(400).json('User not founds.')
+    }
+    else{
+       if(user.request_received_from != null){
+            const info = {
+                sender: user.request_received_from,
+                event: user.request_event
+            }
+            return res.json(info);
+       }else{
+            return res.json("no one requested an event with you");
+
+       }
+
+    }
+
+});
+
+router.route('/accept_event_Invitation').post(async (req, res) => {
+    let user = await User.findOne({username: req.body.username})
+    if (user == null){
+        return res.status(400).json('User not founds.')
+    }
+    else{
+        const info = {
+            sender: user.request_received_from,
+            event: user.request_event
+        }
+        const userFields= {};
+        userFields.id = user._id
+        userFields.request_received_from = null;
+        userFields.request_event = null;
+        user = await User.findByIdAndUpdate(
+            user._id,
+            {$set: userFields},
+            {new: true}
+        );
+        return res.json(info);
+    }
+
+});
+
+router.route('/deny_event_Invitation').post(async (req, res) => {
+    let user = await User.findOne({username: req.body.username})
+    if (user == null){
+        return res.status(400).json('User not founds.')
+    }
+    else{
+        const userFields= {};
+        userFields.id = user._id
+        userFields.request_received_from = null;
+        userFields.request_event = null;
+        user = await User.findByIdAndUpdate(
+            user._id,
+            {$set: userFields},
+            {new: true}
+        );
+    }
+
+});
+
 router.route('/add').post((req, res) => {
     console.log("ss")
     const username = req.body.username;
@@ -55,7 +154,7 @@ router.route('/add').post((req, res) => {
         .catch(err => res.status(400).json('Error: ' + err));
 });
 
-*/
+
 
 
 

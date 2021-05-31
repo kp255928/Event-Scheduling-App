@@ -12,16 +12,17 @@ const userSchema = new Schema({
     },
     password:{
         type:String,
-        //unique: true, //passwords doesn't have to be unique?
         required: true
     },
-    sentRequest:[{
-        username: {type: String, default: ''}
-    }],
-    request: [{
-        userId: {type: mongoose.Schema.Types.ObjectId, ref: 'User'},
-        username: {type: String, default: ''}
-    }],
+    requests_sent_to:{
+        type:String,
+    },
+    request_received_from:{
+        type:String,
+    },
+    request_event:{
+        type:String,
+    },
 }, {
         timestamps: true,
 

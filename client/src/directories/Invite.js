@@ -32,16 +32,73 @@ export default Invite;
 2. The current user that is doing the operation: "username"
 3. The event that the user is trying to add with another user "event"
 *****************************************************/
-function invite(user_to_invite,username,event){
+function invite_user(user_to_invite,username,event){
     const invite_information = {
         username: username,
         user_to_invite:user_to_invite,
+        event: event,
     }
-    axios.post('http://localhost:9000/users/search_user_to_invite', invite_information);
-    //searach data base for name
-    //if found, store the user
-    //request/respond
-    //make event with user name 1 and 2
-    //store in database
+    try{
+
+        axios.post('http://localhost:9000/users/search_user_to_invite/', invite_information);
+        //display something like: request sent to user_to_invite successfully
+    }catch(err){
+        //Cannot find the user in the database, display some errors in the front end (not in the console).
+        console.log("error")
+    }
+
+}
+
+/*****************************************************
+ Make a button in the home page called "check event invitation", when clicked, will invoke the following 
+ function, which checks if the current user is requsted by anyone to join an event.
+
+ If Yes, Display the event, requester and two options: Accept or deny
+    If user onclick "Accept", call the function "accept_event_Invitation"
+    If the user onclick "deny" call the function "deny_event_Invitation"
+ If No, Display "No invitation" to the user
+*****************************************************/
+function check_if_being_requested(current_user){
+    const user = {
+        username: current_user
+    }
+    let info;
+    info = axios.get('http://localhost:9000/users/check_if_being_requested', user);
+    if(info == null){
+        //display the message "no invitation" to the user(in the front end).
+    }else{
+        //Display the event, requester and two options: Accept or deny(in the front end)
+    }
+
+
+}
+
+function accept_event_Invitation(username){
+    const user = {
+        username: username,
+    }
+    let info;
+    info = axios.post('http://localhost:9000/users/accept_event_Invitation', user);
+    
+    //if accepted, add the event to both people
+    const current_user_event = {
+        username: username,
+        event: info.sender
+    }
+    axios.post('http://localhost:9000/events/add', current_user_event);
+    const invited_user_event = {
+        username: info.user,
+        event: info.sender
+    }
+    axios.post('http://localhost:9000/events/add', invited_user_event);
+
+}
+
+function deny_event_Invitation(username){
+    const user = {
+        username: username,
+    }
+    axios.post('http://localhost:9000/users/deny_event_Invitation', user);
+
 
 }
