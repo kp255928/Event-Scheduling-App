@@ -7,7 +7,7 @@ module.exports = function(passport){
      (username,password, done)=>{
             User.findOne({username: username}).then(user =>{
                 if(!user) return done(null, false, {'message':'This username is not registered'});
-                bcrypt.compare(password.toString(), user.password, (err, isMatch)=>{
+                bcrypt.compare(password, user.passowrd, (err, isMatch)=>{
                     if(err) throw err;
                     if(!isMatch) return done(null, false, {'message': 'incorrect password'});
                     else return done(null, user);

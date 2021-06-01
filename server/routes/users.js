@@ -4,6 +4,7 @@ var router = express.Router();
 let User = require("../datamodel/user");
 const bcrypt = require('bcryptjs')
 const passport = require("passport")
+require('../config/passport.js')(passport);
 
 router.route('/search').get(async (req, res) => {
     const username = req.body.username;
@@ -174,7 +175,7 @@ router.route('/register').post((req,res) =>{
             if(err) throw errr;
             newUser.password = hash;
             newUser.save().then(user=>{
-              req.flash('success','signuped');
+              console.log("?")
               res.redirect('/login')
             })
             .catch(err)
@@ -184,29 +185,12 @@ router.route('/register').post((req,res) =>{
     });
   });
 
-<<<<<<< HEAD
-  router.route('/login').post((req,res)=>{
-    const username = req.body.username;
-    const password = req.body.password;
-    User.findOne({'username': username}).then(user=>{
-        if(!user) return res.status(400).json('username not existed')
-        bcrypt.compare(password, user.password, (err, isMatch)=>{
-            if(err) throw err;
-            if(!isMatch) return res.status(400).json('message', 'incorrect password')
-            else {
-                req.flash('success','login') 
-                res.redirect('/')
-            }
-        });
-    })
-=======
-  router.route('/login').post((req,res, next)=>{
+  router.post('/login' , (req,res, next)=>{
     passport.authenticate('local',{
         successRedirect:'/',
         failureRedirect: '/login',
         failureFlash: true
     })(req,res,next);
->>>>>>> 759eff326c3c6948ed1602d71de1fb943cb0f259
   });
 router.route('/delete/:id').delete((req, res) => {
     User.findByIdAndDelete(req.params.id)
