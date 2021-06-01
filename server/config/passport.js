@@ -2,7 +2,7 @@ const LocalStrategy = require('passport-local').Strategy;
 const bcrypt =require('bcryptjs')
 const User = require('../datamodel/user')
 module.exports = function(passport){
-    passport.use( new LocalStrategy( {usernameField: 'username'}, 
+    passport.use( new LocalStrategy( {username: 'username'}, 
             (username,password, done)=>{
             User.findOne({username: username}).then(user =>{
                 if(!user) return done(null, false, {'message':'This username is not registered'});

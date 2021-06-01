@@ -184,10 +184,17 @@ router.route('/register').post((req,res) =>{
       }
     });
   });
+  
+  router.get('/home', (req,res)=> {
+    res.render('index.ejs', {username: req.username})
+    });
+
 
   router.get('/login', passport.authenticate('local', { failureRedirect: '/login' }),
   function(req, res) {
-    res.redirect('/');
+    res.redirect('/register');
+    //if login success, return true, else, return false.
+    
   });
 
 router.route('/delete/:id').delete((req, res) => {
