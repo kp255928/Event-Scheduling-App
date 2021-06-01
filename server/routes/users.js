@@ -185,12 +185,9 @@ router.route('/register').post((req,res) =>{
     });
   });
 
-  router.get('/login' , (req,res, next)=>{
-    passport.authenticate('local',{
-        successRedirect:'/',
-        failureRedirect: '/login',
-        failureFlash: true
-    })
+  router.get('/login', passport.authenticate('local', { failureRedirect: '/login' }),
+  function(req, res) {
+    res.redirect('/');
   });
 
 router.route('/delete/:id').delete((req, res) => {
