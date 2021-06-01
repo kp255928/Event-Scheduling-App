@@ -6,7 +6,7 @@ import Home from './directories/Home';
 import Invite from './directories/Invite';
 import Login from './directories/LogIn';
 import SignUp from './directories/SignUp';
-import Calendar from './CalEven/Calendar';
+//import Calendar from './CalEven/Calendar';
 
 
 class App extends React.Component {//newly created function
