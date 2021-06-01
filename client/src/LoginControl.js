@@ -3,7 +3,7 @@ import axios from "axios";
 class LoginControl {
     constructor() {
         this.LoggedIn = false;
-        this.username = ''; // get this information from login, still working on it
+        this.username = 'Admin'; // get this information from login, still working on it
     }
     
 

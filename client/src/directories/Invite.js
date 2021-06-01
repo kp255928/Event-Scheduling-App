@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, { useEffect, useState, Fragment } from 'react';
 import '../index.css';
 import axios from "axios";
 import logincontrol from "../LoginControl";
@@ -9,13 +9,11 @@ const Invite = () => {
         document.title = 'Invitation';
     });
     const [inviteUser, setInviteUser] = useState('');
-    const [event, setEvent] = useState('');
+    const [event, setEvent] = useState('Pinic Party (temp)');
     const curr_user = logincontrol.getUsername();
+    console.log(curr_user);
 
-    invite_user(inviteUser, curr_user, event);
-
-    // if else use 
-    check_if_being_requested(curr_user);
+    // invite_user(inviteUser, curr_user, event);
 
     const handleAccept = (e) => {
         accept_event_Invitation(curr_user);
@@ -26,13 +24,23 @@ const Invite = () => {
     };
 
 
-
-
-
     return(
         <div className='invite'>
             <div className='useform'>
-            <h2 className="message"></h2>
+                {check_if_being_requested(curr_user)?
+                <div className='display'>
+                <h2 className='message'>You have the following Invitation!</h2>
+                <form>
+                    <label className='invitation'>You have been invited to join {event}</label>
+                    <button className='buttons'>Accept</button>
+                    <button className='buttons'>Decline</button>
+                </form>
+            </div>
+            :
+            <div className='display'>
+                <h2 className='message'>You have no invation! Check back later!</h2>
+            </div>
+            }
             </div>
         </div>
     );
@@ -74,6 +82,7 @@ function invite_user(user_to_invite,username,event){
  If No, Display "No invitation" to the user
 *****************************************************/
 function check_if_being_requested(current_user){
+    /*
     let user = {
         username: current_user
     }
@@ -84,17 +93,19 @@ function check_if_being_requested(current_user){
     returned_object.then(function(info) {
         console.log(info) 
     })
-    /*
-    let info;
-    info = axios.get('http://localhost:9000/users/check_if_being_requested', user);
-    if(info == null){
-        //display the message "no invitation" to the user(in the front end).
-        return false;
-    } else {
-        //Display the event, requester and two options: Accept or deny(in the front end)
-        return true;
-    }
+    
+    // let info;
+    // info = axios.get('http://localhost:9000/users/check_if_being_requested', user);
+    // if(info == null){
+    //     //display the message "no invitation" to the user(in the front end).
+    //     return false;
+    // } else {
+    //     //Display the event, requester and two options: Accept or deny(in the front end)
+    //     return true;
+    // }
     */
+    return false;
+
 
 }
 
