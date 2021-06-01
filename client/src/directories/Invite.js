@@ -74,9 +74,17 @@ function invite_user(user_to_invite,username,event){
  If No, Display "No invitation" to the user
 *****************************************************/
 function check_if_being_requested(current_user){
-    const user = {
+    let user = {
         username: current_user
     }
+    let returned = function(user) {
+        return axios.get('http://localhost:9000/users/check_if_being_requested', user)
+    }
+    let returned_object = returned(user)
+    returned_object.then(function(info) {
+        console.log(info) 
+    })
+    /*
     let info;
     info = axios.get('http://localhost:9000/users/check_if_being_requested', user);
     if(info == null){
@@ -86,7 +94,7 @@ function check_if_being_requested(current_user){
         //Display the event, requester and two options: Accept or deny(in the front end)
         return true;
     }
-
+    */
 
 }
 
