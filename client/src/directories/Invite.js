@@ -1,26 +1,42 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import '../index.css';
 import axios from "axios";
-
+import logincontrol from "../LoginControl";
 //var socket = io();
-
 
 const Invite = () => {
     useEffect(() => {
-        document.title = 'Add Friend';
+        document.title = 'Invitation';
     });
-    return(
-        <div>
-            <h1 className="greet">Share with people</h1>   
+    const [inviteUser, setInviteUser] = useState('');
+    const [event, setEvent] = useState('');
+    const curr_user = logincontrol.getUsername();
 
-            <div className="bottons">
-                <h2 className="">Copy Link</h2>
-                <button className="finishBotton">Done</button> 
+    invite_user(inviteUser, curr_user, event);
+
+    // if else use 
+    check_if_being_requested(curr_user);
+
+    const handleAccept = (e) => {
+        accept_event_Invitation(curr_user);
+    };
+
+    const handleReject = (e) => {
+        deny_event_Invitation(curr_user);
+    };
+
+
+
+
+
+    return(
+        <div className='invite'>
+            <div className='useform'>
+            <h2 className="message"></h2>
             </div>
         </div>
     );
 }
-
 export default Invite;
 
 /*****************************************************
@@ -39,10 +55,9 @@ function invite_user(user_to_invite,username,event){
         event: event,
     }
     try{
-
         axios.post('http://localhost:9000/users/search_user_to_invite/', invite_information);
         //display something like: request sent to user_to_invite successfully
-    }catch(err){
+    } catch(err) {
         //Cannot find the user in the database, display some errors in the front end (not in the console).
         console.log("error")
     }
@@ -66,8 +81,10 @@ function check_if_being_requested(current_user){
     info = axios.get('http://localhost:9000/users/check_if_being_requested', user);
     if(info == null){
         //display the message "no invitation" to the user(in the front end).
-    }else{
+        return false;
+    } else {
         //Display the event, requester and two options: Accept or deny(in the front end)
+        return true;
     }
 
 
