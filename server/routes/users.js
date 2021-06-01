@@ -185,13 +185,14 @@ router.route('/register').post((req,res) =>{
     });
   });
 
-  router.post('/login' , (req,res, next)=>{
+  router.get('/login' , (req,res, next)=>{
     passport.authenticate('local',{
         successRedirect:'/',
         failureRedirect: '/login',
         failureFlash: true
-    })(req,res,next);
+    })
   });
+
 router.route('/delete/:id').delete((req, res) => {
     User.findByIdAndDelete(req.params.id)
         .then(() => res.json('User removed.'))

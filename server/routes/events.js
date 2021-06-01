@@ -4,7 +4,6 @@ let User = require('../datamodel/user');
 //var request = requrire('request');
 
 
-
 router.route('/').get((req, res) => {
     Event.find()
         .then(events => res.json(events))
