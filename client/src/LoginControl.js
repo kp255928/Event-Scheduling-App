@@ -42,7 +42,7 @@ class LoginControl {
             password: user[1],
         }
         console.log(user_object)
-        let returned = axios.get('http://localhost:9000/users/search', user_object)
+        let returned = axios.get('http://localhost:9000/users/login', user_object)
         /***********************************************
          * THROW A TOKEN TO CHECK IF LOGIN SUCCESSFULLY
          ***********************************************/

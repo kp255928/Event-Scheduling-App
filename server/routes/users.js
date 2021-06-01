@@ -190,7 +190,7 @@ router.route('/register').post((req,res) =>{
     User.findOne({'username': username}).then(user=>{
         if(!user) return res.status(400).json('username not existed')
         bcrypt.compare(password, user.password, (err, isMatch)=>{
-            if(error) throw err;
+            if(err) throw err;
             if(!isMatch) return res.status(400).json('message', 'incorrect password')
             else {
                 req.flash('success','login') 
