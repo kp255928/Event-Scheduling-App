@@ -184,6 +184,7 @@ router.route('/register').post((req,res) =>{
     });
   });
 
+<<<<<<< HEAD
   router.route('/login').post((req,res)=>{
     const username = req.body.username;
     const password = req.body.password;
@@ -198,6 +199,14 @@ router.route('/register').post((req,res) =>{
             }
         });
     })
+=======
+  router.route('/login').post((req,res, next)=>{
+    passport.authenticate('local',{
+        successRedirect:'/',
+        failureRedirect: '/login',
+        failureFlash: true
+    })(req,res,next);
+>>>>>>> 759eff326c3c6948ed1602d71de1fb943cb0f259
   });
 router.route('/delete/:id').delete((req, res) => {
     User.findByIdAndDelete(req.params.id)
