@@ -6,7 +6,7 @@ import Home from './directories/Home';
 import Invite from './directories/Invite';
 import Login from './directories/LogIn';
 import SignUp from './directories/SignUp';
-import Calendar from 'react-calendar';
+import Calendar from './CalEven/Calendar';
 
 
 class App extends React.Component {//newly created function
@@ -53,6 +53,19 @@ class App extends React.Component {//newly created function
           </div>
         </div>
       </Router>
+      /*<div>
+        <div>
+          <link to ="/Home/" style={{color:'black'}}>
+            <div>Home</div>
+          </link>
+          <link to ="/LogIn/" style={{color:'black'}}>
+            <div>Login</div>
+          </link>
+          <link to ="/Calendar/" style={{color:'black'}}>
+            <div>Creat events</div>
+          </link>
+        </div>
+      </div>*/
     );
   }
 }
