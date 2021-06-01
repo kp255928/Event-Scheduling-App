@@ -43,9 +43,6 @@ class App extends React.Component {//newly created function
               <Route exact path="/signup">
                 <SignUp />
               </Route>
-              <Route exact path="/create">
-                <Calendar />
-              </Route>
               <Route exact path="/invite">
                 <Invite />
               </Route>
@@ -53,19 +50,6 @@ class App extends React.Component {//newly created function
           </div>
         </div>
       </Router>
-      /*<div>
-        <div>
-          <link to ="/Home/" style={{color:'black'}}>
-            <div>Home</div>
-          </link>
-          <link to ="/LogIn/" style={{color:'black'}}>
-            <div>Login</div>
-          </link>
-          <link to ="/Calendar/" style={{color:'black'}}>
-            <div>Creat events</div>
-          </link>
-        </div>
-      </div>*/
     );
   }
 }
