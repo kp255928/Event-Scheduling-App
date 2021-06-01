@@ -6,7 +6,7 @@ import Home from './directories/Home';
 import Invite from './directories/Invite';
 import Login from './directories/LogIn';
 import SignUp from './directories/SignUp';
-import Calendar from 'react-calendar';
+import Calendar from './CalEven/Calendar';
 
 
 class App extends React.Component {//newly created function
@@ -42,9 +42,6 @@ class App extends React.Component {//newly created function
               </Route>
               <Route exact path="/signup">
                 <SignUp />
-              </Route>
-              <Route exact path="/create">
-                <Calendar />
               </Route>
               <Route exact path="/invite">
                 <Invite />
