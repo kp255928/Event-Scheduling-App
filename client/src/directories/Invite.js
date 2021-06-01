@@ -2,6 +2,7 @@ import React, { useEffect, useState, Fragment } from 'react';
 import '../index.css';
 import axios from "axios";
 import logincontrol from "../LoginControl";
+import { useHistory} from "react-router-dom";
 //var socket = io();
 
 const Invite = () => {
@@ -9,9 +10,14 @@ const Invite = () => {
         document.title = 'Invitation';
     });
     const [inviteUser, setInviteUser] = useState('');
-    const [event, setEvent] = useState('Pinic Party (temp)');
+    const [event, setEvent] = useState('');
+    const [requestEvent, setRequestEvent] = useState('Pinic Party (temp)');
     const curr_user = logincontrol.getUsername();
     console.log(curr_user);
+    const history = useHistory();
+
+    // temp here
+    logincontrol.login()
 
     // invite_user(inviteUser, curr_user, event);
 
@@ -23,25 +29,59 @@ const Invite = () => {
         deny_event_Invitation(curr_user);
     };
 
+    const handleButton = (e) => {
+        if (inviteUser !== '' && event !== '') {
+            e.preventDefault();
+            history.push('/');
+        }
+    }
+
 
     return(
         <div className='invite'>
-            <div className='useform'>
-                {check_if_being_requested(curr_user)?
-                <div className='display'>
-                <h2 className='message'>You have the following Invitation!</h2>
-                <form>
-                    <label className='invitation'>You have been invited to join {event}</label>
-                    <button className='buttons'>Accept</button>
-                    <button className='buttons'>Decline</button>
-                </form>
-            </div>
+            { logincontrol.isLoggedIn()?
+                <div>
+                    <form>
+                        <label className='message'>Invite friend to join the event</label>
+                        <input
+                            type="text"
+                            value={ inviteUser }
+                            onChange={ (e) => setInviteUser(e.target.value) }
+                            placeholder="Enter your friend's username"
+                        />
+                        <label className='message'>Choose an event to invite</label>
+                        {/* could use map here to do options in created event */}
+                        <input
+                            type="text"
+                            value={ event }
+                            onChange={ (e) => setEvent(e.target.value) }
+                            placeholder="Enter event's name"
+                        />
+                        <button onClick={handleButton}>Invite</button>
+                    </form>
+                    
+                    <div className='checkrequest'>
+                        {check_if_being_requested(curr_user)?
+                            <div className='display'>
+                                <h2 className='message'>You have the following Invitation!</h2>
+                                <form>
+                                    <label className='invitation'>You have been invited to join {requestEvent}</label>
+                                    <button className='buttons'>Accept</button>
+                                    <button className='buttons'>Decline</button>
+                                </form>
+                            </div>
+                        :
+                            <div className='display'>
+                                <h2 className='message'>You have no invation! Check back later!</h2>
+                            </div>
+                        }
+                    </div>
+                </div>
             :
-            <div className='display'>
-                <h2 className='message'>You have no invation! Check back later!</h2>
-            </div>
+                <div className='notloggedin'>
+                    <h2 className="message">Please login first</h2>
+                </div>
             }
-            </div>
         </div>
     );
 }
@@ -104,7 +144,7 @@ function check_if_being_requested(current_user){
     //     return true;
     // }
     */
-    return false;
+    return true;
 
 
 }
