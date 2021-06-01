@@ -184,20 +184,12 @@ router.route('/register').post((req,res) =>{
     });
   });
 
-  router.route('/login').post((req,res)=>{
-    const username = req.body.username;
-    const password = req.body.password;
-    User.findOne({'username': username}).then(user=>{
-        if(!user) return res.status(400).json('username not existed')
-        bcrypt.compare(password, user.password, (err, isMatch)=>{
-            if(error) throw err;
-            if(!isMatch) return res.status(400).json('message', 'incorrect password')
-            else {
-                req.flash('success','login') 
-                res.redirect('/')
-            }
-        });
-    })
+  router.route('/login').post((req,res, next)=>{
+    passport.authenticate('local',{
+        successRedirect:'/',
+        failureRedirect: '/login',
+        failureFlash: true
+    })(req,res,next);
   });
 router.route('/delete/:id').delete((req, res) => {
     User.findByIdAndDelete(req.params.id)
