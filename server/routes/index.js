@@ -1,11 +1,12 @@
 var express = require('express')
+var app = express()
 const passport = require('passport')
 const Event = require('../datamodel/events')
 let User = require('../datamodel/user')
 const bcrypt = require('bcryptjs')
 const router = express.Router();
 // login and re
-// router.set('view-engine', 'ejs');
+app.set('view-engine', 'ejs');
 router.get('/register',function(req, res){
     res.render('register.ejs')
 });
@@ -62,8 +63,7 @@ router.delete('/logout', (req,res) =>{
 });
 
 router.get('/', (req,res)=> {
-  res.render('index.ejs', {
-    user: req.user});
+  res.redirect('/signup')
 });
 // about events: add, search( by event name), update event, delete event
 
