@@ -113,7 +113,7 @@ function invite_user(user_to_invite,username,event){
 
 }
 
-function display_event(current_user){
+function display_event_by_user(current_user){
     axios({
         method: "get",
         data: {

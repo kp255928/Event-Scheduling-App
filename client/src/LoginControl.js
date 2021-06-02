@@ -1,12 +1,18 @@
-import axios from "axios";
-
+import Axios from "axios";
+import signup from './directories/SignUp.js';
 class LoginControl {
+    
     constructor() {
         this.LoggedIn = false;
-        this.username = 'Admin'; // get this information from login, still working on it
+        this.username = 's';
+        
     }
-    
-
+    set name(name){
+        this.username = name;
+    }
+    get getName() {
+        return this.username;
+    }
     getUsername() {
         return this.username;
     }
@@ -22,43 +28,47 @@ class LoginControl {
     isLoggedIn() {
         return (this.LoggedIn);
     }
-
+    
     //put the newly register user password and username into the database.
     //maybe need to display a page that notify that user the account creation is a success/failure. And redirect them to the calender.
     RegisterUser(user) {
-        //register works now
-        axios.post('http://localhost:9000/users/register', user)
-        .then(res => console.log(res.data));
-        //need to store this info into the passport
+       return Axios({
+            method: "POST",
+            data: user,
+            withCredentials: true,
+            url: "http://localhost:9000/users/register",
+          }).then((res) => {
+              console.log(res.data.message)
+              return res.data.message;         
+          });
     }
 
     /***********************************************
      * CHECK IF A LOGIN IS REGISTERED
      ***********************************************/
+    
     checkRegister(user) {
-        console.log(user)
         const user_object = {
-            username: user[0],
-            password: user[1],
+            username: user[1],
+            password: user[0]
         }
         console.log(user_object)
-        let returned = function(user_object) {
-            return axios.get('http://localhost:9000/users/login', user_object)
-        }
-        let returned_object = returned(user_object)
-        returned_object.then(function(result) {
-            console.log(result) 
-        })
-
-        /***********************************************
-         * THROW A TOKEN TO CHECK IF LOGIN SUCCESSFULLY
-         ***********************************************/
-        //.then (res => localStorage.setItem('token', res.user.token))
-        //.catch (err => console.log(err))
-        //this.username = returned.username
-        //console.log(returned)
-        
+        var ok;
+            return Axios({
+                method: "POST",
+                data: user_object,
+                withCredentials: true,
+                url: "http://localhost:9000/users/login",
+              }) .then((res) => {
+                //this.username = res.username;
+                return res.data.message;
+              });
     }
+ 
+    
+  
+    
+
 
 
 }

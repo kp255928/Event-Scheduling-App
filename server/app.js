@@ -4,7 +4,7 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var cors = require("cors");
-
+const session = require("express-session")
 var mongoose = require('mongoose');
 var app = express();
 require('dotenv').config();
@@ -14,10 +14,23 @@ app.set('view engine', 'jade');
 
 app.use(logger('dev'));
 app.use(express.json());
-app.use(cors());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(
+  cors({
+    origin: "http://localhost:3000", // <-- location of the react app were connecting to
+    credentials: true,
+  })
+);
+app.use(session({
+  secret: "secretcode",
+  resave: true,
+  savedUninitialized: true
+
+}));
+app.use(cookieParser("secretcode"));
+
 
 //connection to database
 const uri = process.env.ATLAS_URI;
@@ -27,6 +40,9 @@ const connection = mongoose.connection;
 connection.once('open', () => {
     console.log("MongoDB database connection established successfully");
 })
+app.listen(4000, () => {
+  console.log("Server Has Started");
+});
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var testRouter = require("./routes/test");

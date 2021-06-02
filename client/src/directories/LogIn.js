@@ -2,30 +2,61 @@ import React, { useState, useEffect } from "react";
 import { Link, useHistory } from 'react-router-dom';
 import '../index.css';
 import logincontrol from "../LoginControl";
+import Axios from "axios";
 
 const Login = () => {
     useEffect(() => {
         document.title = 'Log In';
     });
-
+    const [data, setData] = useState(null);
     const [username, setName] = useState('');
     const [password, setPassword] = useState('');
+    const [logInStatus, setlogInStatus] = useState('');
     // const [isLoggedIn, setLoggedIn] = useState(false);
     const user = [password,username]
-    const history = useHistory();
     
+    function read(user){
+        
+        let returned = logincontrol.checkRegister(user);
+        returned.then(function(result) {
+            setlogInStatus(result);
+         });
 
-    const handleButton = (e) => {
+    }
+
+    const history = useHistory();
+
+    const getUser = () => {
+        Axios({
+          method: "GET",
+          withCredentials: true,
+          url: "http://localhost:9000/users/user",
+        }).then((res) => {
+          setData(res.data);
+        });
+      };
+     const handleButton = (e) => {
+         
+        
         if (username !== '' && password !== '') {
             // setLoggedIn(true);
-            logincontrol.checkRegister(user);
+            read(user);
+            getUser()
             e.preventDefault();
-            history.push('/');
+            console.log(data.username) //stored logged username
+            logincontrol.username = data.username; //set login control username
+            //history.push('/');
+        
         }
-    }
-    
+     }
     return(
+        
         <div className="login">
+             <div>
+        <h1>Get User after logged in (remember to Remove this after)</h1>
+        <button onClick={getUser}>Submit</button>
+        {data ? <h1>Welcome Back {data.username}</h1> : null}
+      </div>
             <div className="userform">
             <h2 className="pagename">Log in</h2>
             <form>
@@ -46,6 +77,7 @@ const Login = () => {
                     placeholder="Password"
                 />
                 <button onClick={handleButton}>Log In</button>
+                <h1>{logInStatus} </h1>
             </form>
             </div>
             <div className="accountaction">
@@ -53,7 +85,9 @@ const Login = () => {
                 <div className="accountlinks">
                     <Link to="/signup" className="link">Sign up</Link>
                 </div>
+                
             </div>
+           
         </div>
     );
 }

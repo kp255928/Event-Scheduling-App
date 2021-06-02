@@ -4,7 +4,10 @@ var router = express.Router();
 let User = require("../datamodel/user");
 const bcrypt = require('bcryptjs')
 const passport = require("passport")
-require('../config/passport.js')(passport);
+const passportLocal = require('passport-local').Strategy
+router.use(passport.initialize());
+router.use(passport.session());
+require("../config/passport.js")(passport);
 
 router.route('/search').get(async (req, res) => {
     const username = req.body.username;
@@ -158,7 +161,7 @@ router.route('/add').post((req, res) => {
 
 
 
-
+/*
 router.route('/register').post((req,res) =>{
     const username = req.body.username;
     const password = req.body.password;
@@ -176,7 +179,7 @@ router.route('/register').post((req,res) =>{
             newUser.password = hash;
             newUser.save().then(user=>{
               console.log("?")
-              res.redirect('/login')
+              res.redirect('http://localhost:3000/login')
             })
             .catch(err)
           });    
@@ -184,19 +187,53 @@ router.route('/register').post((req,res) =>{
       }
     });
   });
-  
-  router.get('/home', (req,res)=> {
+  */
+
+router.get('/home', (req,res)=> {
     res.render('index.ejs', {username: req.username})
+});
+router.route('/login').post((req, res, next) => {
+    passport.authenticate("local", (err, user, info) => {
+      if (err) throw err;
+      if (!user) res.send({ message: "No User Exists"});
+      else {
+        req.logIn(user, (err) => {
+          if (err) throw err;
+          res.send({ message: "Successfully Authenticated"});
+          console.log(req.user);
+        });
+      }
+    })(req, res, next);
+  });
+
+  router.route('/register').post( (req, res) => {
+    User.findOne({ username: req.body.username }, async (err, doc) => {
+      if (err) throw err;
+      if (doc) res.send({ message: "User Already Exists"});
+      if (!doc) {
+        const hashedPassword = await bcrypt.hash(req.body.password, 10);
+  
+        const newUser = new User({
+          username: req.body.username,
+          password: hashedPassword,
+        });
+        await newUser.save();
+        res.send({ message: "User Created"});
+      }
     });
+  });
+  router.route('/user').get((req, res) => {
+    res.send(req.user); // The req.user stores the entire user that has been authenticated inside of it.
+  });
 
-
-  router.get('/login', passport.authenticate('local', { failureRedirect: '/login' }),
+/*
+  router.post('/login', passport.authenticate('local', { failureRedirect: '/login' }),
   function(req, res) {
-    res.redirect('/register');
+    res.redirect('http://localhost:3000/login');
     //if login success, return true, else, return false.
     
   });
-
+*/
 router.route('/delete/:id').delete((req, res) => {
     User.findByIdAndDelete(req.params.id)
         .then(() => res.json('User removed.'))

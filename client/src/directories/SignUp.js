@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import '../index.css';
 import logincontrol from '../LoginControl';
+import { useHistory } from 'react-router-dom';
 // import axios from 'axios';
 
 
@@ -15,23 +16,28 @@ const SignUp = () => {
     
     const [username, setName] = useState('');
     const [password, setPassword] = useState('');
+    const [signUpStatus, setSignUpStatus] = useState('');
     const user = {
         username: username,
         password: password,
     }
 
-    /*****************************************************
-     * MOVED TO LOGINCONTROL.JS FILE
-     *****************************************************/
-    // //put the newly register user password and username into the database.
-    // //maybe need to display a page that notify that user the account creation is a success/failure. And redirect them to the calender.
-    // function RegisterUser(){
-    //     console.log("1");
-    //     axios.post('http://localhost:9000/users/add',user)
-    //     .then(res => console.log(res.data));
-    //     //need to store this info into the passport
-    // }
-    
+ 
+    function read(user){
+        let returned = logincontrol.RegisterUser(user);
+        returned.then(function(result) {
+            setSignUpStatus(result);
+         });
+
+    }
+    const history = useHistory();
+
+    const handleButton = (e) => {
+        read(user);
+        e.preventDefault();
+        // history.push('/');
+    }
+
     return(
         
         <div className="signup">
@@ -54,7 +60,8 @@ const SignUp = () => {
                     onChange={ (e) => setPassword(e.target.value) }
                     placeholder="Create Password"
                 />
-                <button onClick={() => logincontrol.RegisterUser(user)}> Sign up </button>
+                <button onClick={handleButton}> Sign up </button>
+                <h1>{signUpStatus} </h1>
                 
             </form>
             </div>
@@ -62,6 +69,7 @@ const SignUp = () => {
                 <label className="accountmessage">Already have an account?</label>
                 <div className="accountlinks">
                     <Link to="/login" className="link">Log in</Link>
+
                 </div>
             </div>
         </div>
