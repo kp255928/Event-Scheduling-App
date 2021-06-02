@@ -7,12 +7,10 @@ class LoginControl {
         this.username = 's';
         
     }
-    set name(name){
+    setUsername(name){
         this.username = name;
     }
-    get getName() {
-        return this.username;
-    }
+    
     getUsername() {
         return this.username;
     }

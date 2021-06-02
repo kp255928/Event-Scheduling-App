@@ -16,51 +16,42 @@ const Login = () => {
     const user = [password,username]
     
     function read(user){
-        
         let returned = logincontrol.checkRegister(user);
         returned.then(function(result) {
             setlogInStatus(result);
          });
-         
-
     }
 
     const history = useHistory();
 
     const getUser = () => {
         Axios({
-          method: "GET",
-          withCredentials: true,
-          url: "http://localhost:9000/users/user",
+            method: "GET",
+            withCredentials: true,
+            url: "http://localhost:9000/users/user",
         }).then((res) => {
-          setData(res.data);
+            setData(res.data);
         });
       };
-     const handleButton = (e) => {
-         
-        
-        if (username !== '' && password !== '') {
-            // setLoggedIn(true);
-            read(user);
-            getUser()
-            e.preventDefault();
-            if(logInStatus == "Successfully Authenticated"){
-                logincontrol.username = data.username;
-            }
-     
-            //logincontrol.username = data.username; //set login control username
-            //history.push('/');
-        
+
+    const handleButton = (e) => {
+        read(user);
+        getUser()
+        e.preventDefault();
+        if(logInStatus == "Successfully Authenticated"){
+            logincontrol.setUsername(data.username);
         }
+        //logincontrol.username = data.username; //set login control username
+        // history.push('/');
      }
     return(
         
         <div className="login">
-             <div>
+             {/* <div>
         <h1>Get User after logged in (remember to Remove this after)</h1>
         <button onClick={getUser}>Submit</button>
         {data ? <h1>Welcome Back {data.username}</h1> : null}
-      </div>
+      </div> */}
             <div className="userform">
             <h2 className="pagename">Log in</h2>
             <form>
