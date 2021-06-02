@@ -40,6 +40,22 @@ router.route('/delete/:id').delete((req, res) => {
 })
 
 //delete by event id
+router.route('/display_event').get(async (req, res) => {
+    let events = []
+    const username = req.body.username;
+      //Where User is you mongoose user model
+      Event.find({} , (err, event) => {
+        if(err) //do something...
+        return res.status(400).json('Event not found.')
+        event.map(event => {
+            if(event.username == username){
+                events.push(event);
+            }
+        })
+        return res.json(events)
+    })
+
+});
 
 router.route('/search').get(async (req, res) => {
     const event = await Event.find({eventname: req.body.eventname})

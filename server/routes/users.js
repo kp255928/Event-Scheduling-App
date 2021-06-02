@@ -203,6 +203,7 @@ router.route('/delete/:id').delete((req, res) => {
         .catch(err => res.status(400).json('Error: ' + err));
 })
 
+
 //Update user: only send the fields that need to be updated
 
 router.route('/update/:id').post(async (req, res) => {
