@@ -21,6 +21,7 @@ const Login = () => {
         returned.then(function(result) {
             setlogInStatus(result);
          });
+         
 
     }
 
@@ -43,8 +44,11 @@ const Login = () => {
             read(user);
             getUser()
             e.preventDefault();
-            console.log(data.username) //stored logged username
-            logincontrol.username = data.username; //set login control username
+            if(logInStatus == "Successfully Authenticated"){
+                logincontrol.username = data.username;
+            }
+     
+            //logincontrol.username = data.username; //set login control username
             //history.push('/');
         
         }

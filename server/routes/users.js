@@ -187,7 +187,6 @@ router.route('/register').post((req,res) =>{
       }
     });
   });
-<<<<<<< HEAD
   */
 
 router.get('/home', (req,res)=> {
@@ -233,15 +232,6 @@ router.route('/login').post((req, res, next) => {
     res.redirect('http://localhost:3000/login');
     //if login success, return true, else, return false.
     
-=======
-
-  router.get('/login' , (req,res, next)=>{
-    passport.authenticate('local',{
-        successRedirect:'/',
-        failureRedirect: '/login',
-        failureFlash: true
-    })
->>>>>>> 5399057d2c77bcff14304509b97a5126370a7e53
   });
 */
 router.route('/delete/:id').delete((req, res) => {

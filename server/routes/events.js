@@ -7,7 +7,7 @@ router.route('/checkconflict').get((req,res)=>{
     const stime = req.body.stime;
     const edate = req.body.edate;
     const etime = req.body.etime;
-    const event = await Event.find({username: req.body.username})
+    const event = Event.find({username: req.body.username})
     if(event.length = 0) return res.json("No any events added")
     else{
         for(i=0; i<event.length; i++){
