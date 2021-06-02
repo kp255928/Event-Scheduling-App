@@ -185,13 +185,13 @@ router.route('/register').post((req,res) =>{
     });
   });
 
-  router.get('/login', function(req, res, next){passport.authenticate('local', { failureRedirect: '/login' })},
-  function(req, res) {
-    res.redirect('/home');
-});
-router.get('/home/:id', (req,res)=> {
-    res.render('index.ejs', {usenamer: req.username})
-});
+  router.get('/login' , (req,res, next)=>{
+    passport.authenticate('local',{
+        successRedirect:'/',
+        failureRedirect: '/login',
+        failureFlash: true
+    })
+  });
 
 router.route('/delete/:id').delete((req, res) => {
     User.findByIdAndDelete(req.params.id)
