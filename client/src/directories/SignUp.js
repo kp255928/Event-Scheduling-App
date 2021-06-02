@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import '../index.css';
 import logincontrol from '../LoginControl';
+import { useHistory } from 'react-router-dom';
 // import axios from 'axios';
 
 
@@ -31,6 +32,13 @@ const SignUp = () => {
     //     .then(res => console.log(res.data));
     //     //need to store this info into the passport
     // }
+    const history = useHistory();
+
+    const handleButton = (e) => {
+        logincontrol.Register(user);
+        e.preventDefault();
+        // history.push('/');
+    }
     
     return(
         
@@ -54,7 +62,7 @@ const SignUp = () => {
                     onChange={ (e) => setPassword(e.target.value) }
                     placeholder="Create Password"
                 />
-                <button onClick={() => logincontrol.RegisterUser(user)}> Sign up </button>
+                <button onClick={handleButton}> Sign up </button>
                 
             </form>
             </div>
