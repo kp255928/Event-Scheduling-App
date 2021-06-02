@@ -62,8 +62,7 @@ router.delete('/logout', (req,res) =>{
 });
 
 router.get('/', (req,res)=> {
-  res.render('index.ejs', {
-    user: req.user});
+  res.redirect('/signup')
 });
 // about events: add, search( by event name), update event, delete event
 
