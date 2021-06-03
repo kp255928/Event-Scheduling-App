@@ -20,7 +20,7 @@ class LoginControl {
     }
 
     logout() {
-        this.LoggedIn = false;
+        new LoginControl;
     }
 
     isLoggedIn() {

@@ -40,6 +40,7 @@ const Login = () => {
         e.preventDefault();
         if(logInStatus == "Successfully Authenticated"){
             logincontrol.setUsername(data.username);
+            logincontrol.login();
         }
         //logincontrol.username = data.username; //set login control username
         // history.push('/');
@@ -47,11 +48,11 @@ const Login = () => {
     return(
         
         <div className="login">
-             {/* <div>
+             <div>
         <h1>Get User after logged in (remember to Remove this after)</h1>
         <button onClick={getUser}>Submit</button>
         {data ? <h1>Welcome Back {data.username}</h1> : null}
-      </div> */}
+      </div>
             <div className="userform">
             <h2 className="pagename">Log in</h2>
             <form>

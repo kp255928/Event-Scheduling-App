@@ -21,7 +21,7 @@ const Invite = () => {
     // temp here
     logincontrol.login()
 
-    // invite_user(inviteUser, curr_user, event);
+    invite_user(inviteUser, curr_user, event);
 
     const handleAccept = (e) => {
         accept_event_Invitation(curr_user);
@@ -68,8 +68,8 @@ const Invite = () => {
                                 <h2 className='message'>You have the following Invitation!</h2>
                                 <form>
                                     <label className='invitation'>You have been invited to join {requestEvent}</label>
-                                    <button className='buttons'>Accept</button>
-                                    <button className='buttons'>Decline</button>
+                                    <button className='buttons' onClick={handleAccept}>Accept</button>
+                                    <button className='buttons' onClick={handleReject}>Decline</button>
                                 </form>
                             </div>
                         :

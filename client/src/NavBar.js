@@ -4,27 +4,18 @@ import './index.css';
 import logincontrol from "./LoginControl";
 
 const NavBar = () => {
-    // const isIn = (
-    //     <Fragment>
-    //         <Link to="/" className="link">Log out</Link>
-    //     </Fragment>
-    // );
-
-    // const nIsIn = (
-    //     <Fragment>
-    //         <Link to="/login" className="link">Log in</Link>
-    //     </Fragment>
-    // );
-    //     console.log(global.isLoggedIn);
-        
+    // logincontrol.login();
     return(
         <nav className="navbar">
             <Link to="/" className="icon">Calendar App</Link>       
             <div className="navlinks">
-                {/* {logincontrol.isLoggedIn() ? isIn : nIsIn } */}
-                <Link to="/login" className="link">Log in</Link>
-                {/* <Link to="/signup" className="link">Sign up</Link> */}
-                <Link to="/create" className="link">Create events</Link>
+                {logincontrol.isLoggedIn() ? 
+                    <Link to="/" className="link" onClick={logincontrol.logout}>Log out</Link>
+                    :
+                    <Link to="/login" className="link">Log in</Link>
+                }
+                {/* <Link to="/login" className="link">Log in</Link> */}
+                {/* <Link to="/create" className="link">Create events</Link> */}
                 <Link to="/invite" className="link">Invite friends</Link>
             </div>
             <div id="searchWrapper">
