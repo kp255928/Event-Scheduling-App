@@ -13,7 +13,11 @@ const Invite = () => {
     });
     const [inviteUser, setInviteUser] = useState('');
     const [event, setEvent] = useState('');
-    const [requestEvent, setRequestEvent] = useState('Pinic Party (temp)');
+    const [requestEvent, setRequestEvent] = useState('');
+    const [invitestat, setinvitestat] = useState('');
+    const [is_false, set_is_false] = useState('');
+    const [is_ok, set_ok] = useState('');
+    const [event_successful, setES] = useState('');
     const curr_user = logincontrol.getUsername();
     console.log(curr_user);
     const history = useHistory();
@@ -34,12 +38,51 @@ const Invite = () => {
     const handleButton = (e) => {
         if (inviteUser !== '' && event !== '') {
             e.preventDefault();
-            invite_user(inviteUser, curr_user, event);
-            history.push('/');
+            console.log(curr_user + "noes")
+            display_event_by_user(curr_user,event)
+
+            if(is_ok == true){
+                invite_user(inviteUser, curr_user, event);
+                setinvitestat("Invitation successful");
+            }else{
+                setinvitestat("The is no such event existed");
+            }
+            
+            //history.push('/');
         }
     }
-
-
+    function check_if_being_requested(current_user){
+        const usr = {
+            "username": current_user
+        }
+        let returned = check_request(usr);
+        returned.then(function(result) {
+            if(result.event!=null){
+                console.log(result.event)
+                console.log(result.sender)
+                set_is_false(true);
+                setRequestEvent(result.event);
+            }else{
+                set_is_false(false);
+            }
+    
+         });
+    
+        
+        return is_false;
+    
+    }
+    function display_event_by_user(curr_user,event){
+        let returned = check(curr_user);
+            returned.then(function(result) {
+                var n = result.includes(event);
+                console.log(n)
+                if(n){
+                    set_ok(true);
+                }
+    
+             });
+    }
     return(
         <div className='invite'>
             { logincontrol.isLoggedIn()?
@@ -52,7 +95,7 @@ const Invite = () => {
                             onChange={ (e) => setInviteUser(e.target.value) }
                             placeholder="Enter your friend's username"
                         />
-                        <label className='message'>Choose an event to invite</label>
+                        <label className='message'>Choose an event(that already existed) to invite</label>
                         {/* could use map here to do options in created event */}
                         <input
                             type="text"
@@ -62,7 +105,7 @@ const Invite = () => {
                         />
                         <button onClick={handleButton}>Invite</button>
                     </form>
-                    
+                    <h1>{invitestat} </h1>
                     <div className='checkrequest'>
                         {check_if_being_requested(curr_user)?
                             <div className='display'>
@@ -88,7 +131,7 @@ const Invite = () => {
         </div>
     );
 }
-export default Invite;
+
 
 /*****************************************************
  * Create some kind of searchbox such that when the user creates an event, and they clicked on the button "Invite user to event"
@@ -114,15 +157,20 @@ function invite_user(user_to_invite,username,event){
 
 }
 
-function display_event_by_user(current_user){
-    axios({
-        method: "get",
+
+async function check(current_user){
+    console.log(current_user)
+    return axios({
+        method: "POST",
         data: {
             username:current_user
         },
         url : "http://localhost:9000/events/display_event",
         
-    }).then((res)=>console.log(res));
+    }).then((res) => {
+        return res.data;         
+    });
+  
     
 }
 
@@ -135,46 +183,30 @@ function display_event_by_user(current_user){
  If No, Display "No invitation" to the user
 
 *****************************************************/
-function check_if_being_requested(current_user){
-    let user = {
-        username: current_user
-    }
-    // let returned = function(user) {
-    //     return axios.get('http://localhost:9000/users/check_if_being_requested', user)
-    // }
-    // let returned_object = returned(user)
-    // returned_object.then(function(info) {
-    //     console.log(info) 
-    // })
+function check_request(usr){
+    console.log(usr)
+    return axios({
+        method: "POST",
+        data: usr,
+        url: "http://localhost:9000/users/check_if_being_requested",
+      }).then((res) => {
+          return res.data;         
+      });
     
-    let info;
-    info = axios.get('http://localhost:9000/users/check_if_being_requested', user);
-    if(info == null){
-        //display the message "no invitation" to the user(in the front end).
-        return false;
-    } else {
-        //Display the event, requester and two options: Accept or deny(in the front end)
-        // setRequestEvent(info[1]);
-        return true;
-    }
-    // return true;
 
 
 }
 
-function accept_event_Invitation(username){
+
+function accept_event_Invitation(curr_user){
     const user = {
-        username: username,
+        username: curr_user 
     }
     let info;
     info = axios.post('http://localhost:9000/users/accept_event_Invitation', user);
     
-    //if accepted, add the event to both people
-    const current_user_event = {
-        username: username,
-        event: info.sender
-    }
-    axios.post('http://localhost:9000/events/add', current_user_event);
+    //if accepted, add the event to the invited person
+    //axios.post('http://localhost:9000/events/add', current_user_event);
     const invited_user_event = {
         username: info.user,
         event: info.sender
@@ -191,3 +223,6 @@ function deny_event_Invitation(username){
 
 
 }
+
+export default Invite;
+

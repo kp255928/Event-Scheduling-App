@@ -13,7 +13,10 @@ class App extends React.Component {//newly created function
     
     constructor(props) {
         super(props);
-        this.state = {apiResponse:""};
+
+        this.state = {apiResponse:"",
+                      loggedInResult:""      
+                      };
     }
    
     callAPI() {

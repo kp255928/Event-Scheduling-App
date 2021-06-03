@@ -4,7 +4,7 @@ class LoginControl {
     
     constructor() {
         this.LoggedIn = false;
-        this.username = 's';
+        this.username = ' ';
         
     }
     setUsername(name){
@@ -45,23 +45,7 @@ class LoginControl {
      * CHECK IF A LOGIN IS REGISTERED
      ***********************************************/
     
-    checkRegister(user) {
-        const user_object = {
-            username: user[1],
-            password: user[0]
-        }
-        console.log(user_object)
-        var ok;
-            return Axios({
-                method: "POST",
-                data: user_object,
-                withCredentials: true,
-                url: "http://localhost:9000/users/login",
-              }) .then((res) => {
-                //this.username = res.username;
-                return res.data.message;
-              });
-    }
+    
  
     
   

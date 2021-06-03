@@ -1,9 +1,9 @@
-import React, { useState, useEffect } from "react";
+import React, {setState, useState, useEffect } from "react";
 import { Link, useHistory } from 'react-router-dom';
 import '../index.css';
 import logincontrol from "../LoginControl";
 import Axios from "axios";
-
+import '../App.js'
 const Login = () => {
     useEffect(() => {
         document.title = 'Log In';
@@ -12,13 +12,14 @@ const Login = () => {
     const [username, setName] = useState('');
     const [password, setPassword] = useState('');
     const [logInStatus, setlogInStatus] = useState('');
+    
     // const [isLoggedIn, setLoggedIn] = useState(false);
     const user = [password,username]
     
     function read(user){
-        let returned = logincontrol.checkRegister(user);
+        let returned = checkRegister(user);
         returned.then(function(result) {
-            setlogInStatus(result);
+            setlogInStatus(result.data.message);
          });
     }
 
@@ -33,17 +34,50 @@ const Login = () => {
             setData(res.data);
         });
       };
-
-    const handleButton = (e) => {
+      
+     function checkRegister(user) {
+        const user_object = {
+            username: user[1],
+            password: user[0]
+        }
+        console.log(user_object)
+        var ok;
+            return Axios({
+                method: "POST",
+                data: user_object,
+                withCredentials: true,
+                url: "http://localhost:9000/users/login",
+              }); //.then((res) => {
+               // //this.username = res.username;
+              //  return res.data.message;
+              //});
+    }
+    function fuck(user){
         read(user);
+    }
+    const handleButton = (e) => {
+        fuck(user);
         getUser()
+        
         e.preventDefault();
+        
+        console.log(logInStatus + "ok")
         if(logInStatus == "Successfully Authenticated"){
-            logincontrol.setUsername(data.username);
+            console.log(data.username)
+            logincontrol.username = data.username;
+            console.log(logincontrol.username)
             logincontrol.login();
         }
         //logincontrol.username = data.username; //set login control username
         // history.push('/');
+     }
+     function update(logInStatus){
+         if(logInStatus == "Successfully Authenticated"){
+            console.log(data.username)
+            logincontrol.username = data.username;
+            console.log(logincontrol.username)
+            logincontrol.login();
+         }
      }
     return(
         
@@ -74,6 +108,7 @@ const Login = () => {
                 />
                 <button onClick={handleButton}>Log In</button>
                 <h1>{logInStatus} </h1>
+                <h1>{update(logInStatus)} </h1>
             </form>
             </div>
             <div className="accountaction">

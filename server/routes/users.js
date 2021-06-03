@@ -83,10 +83,15 @@ router.route('/search_user_to_invite').post(async (req, res) => {
 
 });
 
-router.route('/check_if_being_requested').get(async (req, res) => {
+router.route('/check_if_being_requested').post(async (req, res) => {
+    const {
+        username,
+    } = req.body;
+    console.log(username)
+    console.log(req.body.username)
     let user = await User.findOne({username: req.body.username})
     if (user == null){
-        return res.status(400).json('User not founds.')
+        return res.send({ message: "user not found"})
     }
     else{
        if(user.request_received_from != null){
@@ -94,9 +99,9 @@ router.route('/check_if_being_requested').get(async (req, res) => {
                 sender: user.request_received_from,
                 event: user.request_event
             }
-            return res.json(info);
+            return res.send(info)
        }else{
-            return res.json("no one requested an event with you");
+            return res.send({ message: "No one requested an event with you"})
 
        }
 
@@ -192,7 +197,7 @@ router.route('/register').post((req,res) =>{
 router.get('/home', (req,res)=> {
     res.render('index.ejs', {username: req.username})
 });
-router.route('/login').post((req, res, next) => {
+router.route('/login').post(async (req, res, next) => {
     passport.authenticate("local", (err, user, info) => {
       if (err) throw err;
       if (!user) res.send({ message: "No User Exists"});
@@ -206,7 +211,7 @@ router.route('/login').post((req, res, next) => {
     })(req, res, next);
   });
 
-  router.route('/register').post( (req, res) => {
+  router.route('/register').post((req, res) => {
     User.findOne({ username: req.body.username }, async (err, doc) => {
       if (err) throw err;
       if (doc) res.send({ message: "User Already Exists"});
