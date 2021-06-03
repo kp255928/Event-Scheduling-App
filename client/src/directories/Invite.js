@@ -1,5 +1,3 @@
-
-
 import React, { useEffect, useState, Fragment } from 'react';
 import '../index.css';
 import axios from "axios";
@@ -24,8 +22,6 @@ const Invite = () => {
 
     // temp here
     logincontrol.login()
-
-
 
     const handleAccept = (e) => {
         accept_event_Invitation(curr_user);
@@ -70,6 +66,7 @@ const Invite = () => {
     
         
         return is_false;
+        // return true;
     
     }
     function display_event_by_user(curr_user,event){
@@ -103,7 +100,7 @@ const Invite = () => {
                             onChange={ (e) => setEvent(e.target.value) }
                             placeholder="Enter event's name"
                         />
-                        <button onClick={handleButton}>Invite</button>
+                        <button onClick={handleButton}>Invite now</button>
                     </form>
                     <h1>{invitestat} </h1>
                     <div className='checkrequest'>
@@ -113,7 +110,7 @@ const Invite = () => {
                                 <form>
                                     <label className='invitation'>You have been invited to join {requestEvent}</label>
                                     <button className='buttons' onClick={handleAccept}>Accept</button>
-                                    <button className='buttons' onClick={handleReject}>Decline</button>
+                                    <button className='rejectbuttons' onClick={handleReject}>Decline</button>
                                 </form>
                             </div>
                         :

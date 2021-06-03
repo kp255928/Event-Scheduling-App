@@ -192,6 +192,94 @@
   align-items: center;
 }
 
+/* Invite */
+.invite {
+  display: block;
+  max-width: 700px;
+  margin: 0 auto;
+  text-align: left;
+  font-size: 25px;
+  color: rgb(45,104,196);
+  margin-top: 40px;
+  margin-bottom: 30px;
+}
+
+.invite .message {
+  /* padding: auto; */
+}
+
+.invite button {
+  width: 30%;
+  font-size: 20px;
+  background: rgb(45,104,196);
+  color: white;
+  border: 0px;
+  padding: 8px;
+  border-radius: 8px;
+  cursor: pointer;
+  margin-bottom: 25px;
+}
+
+.display h2 {
+  font-size: 30px;
+  color: rgb(45,104,196);
+  margin-top: 40px;
+  margin-bottom: 30px;
+  text-align: center;
+}
+
+.invite input {
+  text-align: left;
+  font-size: 15px;
+  width: 100%;
+  padding: 10px 10px;
+  margin: 10px 0px;
+  border: 2px solid #eaeaea;
+  border-radius: 7px;
+  box-sizing: border-box;
+  display: block;
+}
+
+.invite .display {
+  text-align: center;
+}
+
+.invite .display form button {
+  width: 30%;
+  font-size: 20px;
+  background: rgb(45,104,196);
+  color: white;
+  border: 0px;
+  padding: 8px;
+  border-radius: 8px;
+  cursor: pointer;
+  margin-top: 25px;
+  display: inline-block;
+  align-items: center;
+
+}
+
+.invite .display form label {
+  display:flex;
+}
+
+.invite .display form .rejectbuttons {
+  width: 30%;
+  font-size: 20px;
+  background: white;
+  color: palevioletred;
+  border: 2px solid #eaeaea;
+  padding: 8px;
+  border-radius: 8px;
+  cursor: pointer;
+  margin-bottom: 25px;
+  margin-left: 30px;
+}
+
+.invite .notloggedin{
+  text-align: center;
+}
+
 /* Others */
 .greet {
   color: rgb(45,104,196);
