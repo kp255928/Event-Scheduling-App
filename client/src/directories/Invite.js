@@ -21,7 +21,7 @@ const Invite = () => {
     // temp here
     logincontrol.login()
 
-    invite_user(inviteUser, curr_user, event);
+
 
     const handleAccept = (e) => {
         accept_event_Invitation(curr_user);
@@ -34,6 +34,7 @@ const Invite = () => {
     const handleButton = (e) => {
         if (inviteUser !== '' && event !== '') {
             e.preventDefault();
+            invite_user(inviteUser, curr_user, event);
             history.push('/');
         }
     }
@@ -135,29 +136,28 @@ function display_event_by_user(current_user){
 
 *****************************************************/
 function check_if_being_requested(current_user){
-    /*
     let user = {
         username: current_user
     }
-    let returned = function(user) {
-        return axios.get('http://localhost:9000/users/check_if_being_requested', user)
-    }
-    let returned_object = returned(user)
-    returned_object.then(function(info) {
-        console.log(info) 
-    })
-    
-    // let info;
-    // info = axios.get('http://localhost:9000/users/check_if_being_requested', user);
-    // if(info == null){
-    //     //display the message "no invitation" to the user(in the front end).
-    //     return false;
-    // } else {
-    //     //Display the event, requester and two options: Accept or deny(in the front end)
-    //     return true;
+    // let returned = function(user) {
+    //     return axios.get('http://localhost:9000/users/check_if_being_requested', user)
     // }
-    */
-    return true;
+    // let returned_object = returned(user)
+    // returned_object.then(function(info) {
+    //     console.log(info) 
+    // })
+    
+    let info;
+    info = axios.get('http://localhost:9000/users/check_if_being_requested', user);
+    if(info == null){
+        //display the message "no invitation" to the user(in the front end).
+        return false;
+    } else {
+        //Display the event, requester and two options: Accept or deny(in the front end)
+        // setRequestEvent(info[1]);
+        return true;
+    }
+    // return true;
 
 
 }
