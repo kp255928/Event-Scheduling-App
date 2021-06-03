@@ -321,16 +321,24 @@ function todoMain() {
 
     calendar.render();
   }
-
   function addEvent({id, todo, date, time, done}) {
     calendar.addEvent({
       id: id,
       title: todo,
       start: time === "" ? date : `${date}T${time}`,
       backgroundColor : (done ? "green" : "#a11e12"),
+      user_object = {date=date, time=time}
     });
+    return Axios({
+      method: "GET",
+      data: user_object,
+      withCredentials: true,
+      url: "http://localhost:9000/event/checkconflict",
+      }).then((res)=>{
+        return res.data.message;
+      });
   }
-
+  f
   function clearTable() {
     // Empty the table, keeping the first row
     let trElems = todoTable.getElementsByTagName("tr");

@@ -200,7 +200,7 @@ router.get('/home', (req,res)=> {
 router.route('/login').post(async (req, res, next) => {
     passport.authenticate("local", (err, user, info) => {
       if (err) throw err;
-      if (!user) res.send({ message: "No User Exists"});
+      if (!user) res.send({ message: "No Username Exists"});
       else {
         req.logIn(user, (err) => {
           if (err) throw err;
