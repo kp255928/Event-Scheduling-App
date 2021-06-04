@@ -89,8 +89,8 @@ const Home = () => {
     function add_event2(event_object){
         let returned = add_event(event_object);
         returned.then(function(result) {
-            console.log("Your event is added to the scheduler!")
-            update_isConflict("Your event is added to the scheduler!")
+            console.log("Your event has been added to the scheduler!")
+            update_isConflict("Your event has been added to the scheduler!")
          });
     }
     function add_event(){
