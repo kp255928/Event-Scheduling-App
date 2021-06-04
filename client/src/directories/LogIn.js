@@ -52,13 +52,10 @@ const Login = () => {
               //  return res.data.message;
               //});
     }
-    function fuck(user){
-        read(user);
-    }
+
     const handleButton = (e) => {
-        fuck(user);
+        read(user);
         getUser()
-        
         e.preventDefault();
         
         console.log(logInStatus + "ok")
@@ -67,21 +64,22 @@ const Login = () => {
      }
      function update(logInStatus){
          console.log(logInStatus)
-         if(logInStatus == "Successfully Authenticated"){
+         if(logInStatus === "Successfully Authenticated"){
             console.log(data.username)
             logincontrol.username = data.username;
             console.log(logincontrol.username)
             logincontrol.login();
+            // history.push('/');
          }
      }
     return(
         
         <div className="login">
-             <div>
+             {/* <div>
         <h1>Get User after logged in</h1>
         <button onClick={getUser}>Submit</button>
         {data ? <h1>Welcome Back {data.username}</h1> : null}
-      </div>
+      </div> */}
             <div className="userform">
             <h2 className="pagename">Log in</h2>
             <form>

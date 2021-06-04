@@ -6,6 +6,7 @@ import Home from './directories/Home';
 import Invite from './directories/Invite';
 import Login from './directories/LogIn';
 import SignUp from './directories/SignUp';
+import Search from './directories/Search';
 //import calendar from './calendar/calendar';
 
 
@@ -48,6 +49,9 @@ class App extends React.Component {//newly created function
               </Route>
               <Route exact path="/invite">
                 <Invite />
+              </Route>
+              <Route exact path="/search">
+                <Search />
               </Route>
             </Switch>
           </div>

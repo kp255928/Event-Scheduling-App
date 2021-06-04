@@ -25,7 +25,7 @@ const Home = () => {
     //     {title: 'End-of-quarter LA feedback survey due', date:'June 4', discription:'End-of-quarter LA feedback survey due', id: 4}
 
     // ]);
-
+    // logincontrol.login();
     const handleSubmit = (e) => {
         //backend function
         //check conflict:
@@ -154,13 +154,13 @@ const Home = () => {
                         />
                         <button onClick={handleSubmit}>Add Event</button>
                         {/*<h1>{ update(isConflict) }</h1>*/}
-                        <h1>{ isConflict}</h1>
+                        <h1>{ isConflict }</h1>
                     </form>
                     </div>
-                    <button onClick={handleB}>Show your events</button>
+                    <button className="show-button" onClick={handleB}>Reload events</button>
                     {userEvent.length === 0?
                         <div className="message">
-                            <h2>You have no upcoming event</h2>
+                            <h2>You have no upcoming event, check back again</h2>
                         </div>
                     :
                         <div className="display">
