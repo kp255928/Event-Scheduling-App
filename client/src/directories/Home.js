@@ -157,7 +157,7 @@ const Home = () => {
                         <h1>{ isConflict }</h1>
                     </form>
                     </div>
-                    <button className="show-button" onClick={handleB}>Show your events</button>
+                    <button className="show-button" onClick={handleB}>Reload events</button>
                     {userEvent.length === 0?
                         <div className="message">
                             <h2>You have no upcoming event, check back again</h2>

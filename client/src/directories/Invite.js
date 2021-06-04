@@ -21,7 +21,7 @@ const Invite = () => {
     const history = useHistory();
 
     // temp here
-    logincontrol.login()
+    // logincontrol.login()
 
     const handleAccept = (e) => {
         accept_event_Invitation(curr_user);
