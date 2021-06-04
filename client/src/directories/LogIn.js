@@ -62,16 +62,11 @@ const Login = () => {
         e.preventDefault();
         
         console.log(logInStatus + "ok")
-        if(logInStatus == "Successfully Authenticated"){
-            console.log(data.username)
-            logincontrol.username = data.username;
-            console.log(logincontrol.username)
-            logincontrol.login();
-        }
         //logincontrol.username = data.username; //set login control username
         // history.push('/');
      }
      function update(logInStatus){
+         console.log(logInStatus)
          if(logInStatus == "Successfully Authenticated"){
             console.log(data.username)
             logincontrol.username = data.username;
@@ -83,7 +78,7 @@ const Login = () => {
         
         <div className="login">
              <div>
-        <h1>Get User after logged in (remember to Remove this after)</h1>
+        <h1>Get User after logged in</h1>
         <button onClick={getUser}>Submit</button>
         {data ? <h1>Welcome Back {data.username}</h1> : null}
       </div>
@@ -112,7 +107,7 @@ const Login = () => {
             </form>
             </div>
             <div className="accountaction">
-                <label className="accountmessage">Don't have an account?</label>
+                <label className="accountmessage">Don't have an acco unt?</label>
                 <div className="accountlinks">
                     <Link to="/signup" className="link">Sign up</Link>
                 </div>
