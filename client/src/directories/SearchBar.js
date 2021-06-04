@@ -36,7 +36,7 @@ import logincontrol from '../LoginControl'
 //     });
 // }
 
-export const loadEvents = async(event, eventList, hpEvents) => {
+export const loadEvents = async(event, hpEvents) => {
     try {
         // const res = await fetch('http://localhost:9000/events/search',{
         //     method:"POST",
@@ -63,8 +63,9 @@ export const loadEvents = async(event, eventList, hpEvents) => {
           .catch(function (error) {
             console.log(error);
           });
+          console.log(hpEvents)
           
-          displayEvents(hpEvents, eventList);
+          //displayEvents(hpEvents, eventList);
     }catch (err){
         console.error(err);
     }
