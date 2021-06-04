@@ -16,8 +16,6 @@ const NavBar = () => {
     useEffect(() => {
         eventList = document.getElementById('eventList');
         loadEvents(event, eventList, hpEvents);
-        //console.log(hpEvents);
-        //console.log(eventList)
     },[])
 
     const handleChange =(e) => {

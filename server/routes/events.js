@@ -91,7 +91,7 @@ router.route('/search').post(async (req, res) => {
         return res.status(400).json('Event not found.')
     }else{
          //if the event is matched, but the search is not the same as the one created the event, return error.
-         //returns an array of events (there could be multiple). Uses a loop to verify username for each event.
+         //returns an array of events (there could be multiple). Uses a loop to verify username for each event
          var i;
          for (i = 0; i < event.length; i++) { 
             if (req.body.username !== event[i].username){

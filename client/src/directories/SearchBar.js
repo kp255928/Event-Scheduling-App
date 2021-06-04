@@ -55,7 +55,6 @@ export const loadEvents = async(event, eventList, hpEvents) => {
             //   for( i = 0; i < response.data.length; i++){
             //     hpEvents.push(response.data[i]);
             //   }
-            console.log(response)
             response?.data.map((data) => {
                 hpEvents.push(data);
             })
@@ -71,8 +70,6 @@ export const loadEvents = async(event, eventList, hpEvents) => {
 };
 
 export const displayEvents = (events, eventList) => {
-    console.log(events)
-    console.log(events[0])
     const htmlString = events //Just assume the eventlist is on htmlpage
         .map((Event) => {
             console.log(Event)
@@ -85,7 +82,6 @@ export const displayEvents = (events, eventList) => {
         })
         .join('');
     eventList.innerHTML = htmlString;
-    console.log(eventList)
 };
 
 loadEvents();
