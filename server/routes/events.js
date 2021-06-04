@@ -2,21 +2,24 @@ const router = require('express').Router();
 let Event = require('../datamodel/events');
 let User = require('../datamodel/user');
 //var request = requrire('request');
-router.route('/checkconflict').get(async (req,res)=>{
-    const sdate = req.body.date;
-    const stime = req.body.time;
+router.route('/checkconflict').post(async (req,res)=>{
+    const sdate = req.body.sdate;
+    const stime = req.body.stime;
 
 
     const event = await Event.find({username: req.body.username})
-    if(event.length === 0) return res.send({message: "No any events added"})
-    else{
+    //if(event.length === 0) return res.send({message: "No any events added"})
+    //else{
         console.log(event)
         console.log(sdate, stime)
         for(i=0; i<event.length; i++){
+            console.log(event[i].sdate)
            if(sdate === event[i].sdate){
                // we use 0000->2359 format
+               console.log(event[i].stime)
                if(stime === event[i].stime){
-               return res.send({message:"there is conflict"})
+                    console.log("here")
+                    return res.send({message:"Conflict detected. Please change your event date/time"})
                }
            }
         //    if(sdate.substring(0,2)===event.sdate.substring(0,2)){
@@ -26,8 +29,9 @@ router.route('/checkconflict').get(async (req,res)=>{
         //         return res.send({message:"there is conflict"})
            
         }
+        console.log("here2")
         return res.send({message:"no conflict found"})
-    }
+   // }
 })
 
 router.route('/').get((req, res) => {
@@ -72,6 +76,27 @@ router.route('/display_event').post(async (req, res) => {
         event.map(event => {
             if(event.username == username){
                 events.push(event.eventname);
+            }
+        })
+        return res.send(events)
+    })
+
+});
+router.route('/display_event_object').post(async (req, res) => {
+    let events = []
+    const username = req.body.username;
+      //Where User is you mongoose user model
+      Event.find({} , (err, event) => {
+        if(err) //do something...
+        return res.send("Event or the user is not found")
+        event.map(event => {
+            if(event.username == username){
+                obj = {
+                    eventname:event.eventname,
+                    date:event.sdate,
+                    time:event.stime
+                }
+                events.push(obj);
             }
         })
         return res.send(events)
