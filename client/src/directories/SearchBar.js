@@ -1,58 +1,82 @@
 import axios from 'axios';
 import logincontrol from '../LoginControl'
 
-const eventList = document.getElementById('eventList');
-const searchBar = document.getElementById('searchBar');
-let hpEvents =[];
-console.log(searchBar);
-const event = {
-    username: logincontrol.getUsername(), //grab the user name from the front end (where is the username stored in the front end?)
-    eventname: eventname, 
-}
+//const eventList = document.getElementById('eventList');
+// const searchBar = document.getElementById('searchBar');
+// let hpEvents =[];
+// //console.log(searchBar);
+// const event = {
+//     username: "hersh", //logincontrol.getUsername(), //grab the user name from the front end (where is the username stored in the front end?)
+//     eventname: "", 
+// }
 //get the event name from the database
 
-function getEvents(){
+// export function getEvents(){
+//     try {
+//         //successfully grab event
+//         //returned_event = axios.get('http://localhost:9000/events/search', event);
+//       }
+//       catch(err) {
+//         //display mesage in front end that no event exists for the user
+//       }
+
+// }
+// export function searchBarFunc(){
+//     searchBar.addEventListener('keyup', e => {
+//     const searchString = e.target.value.toLowerCase();
+//     console.log(searchString);
+
+//     const filteredEvents = hpEvents.filter( Event => {
+//         return(
+//             Event.name.toLowerCase().includes(searchString) || 
+//             Event.date.includes(searchString)
+//         );
+//     });
+//     displayEvents(filteredEvents);
+//     });
+// }
+
+export const loadEvents = async(event, eventList, hpEvents) => {
     try {
-        //successfully grab event
-        returned_event = axios.get('http://localhost:9000/events/search', event);
-      }
-      catch(err) {
-        //display mesage in front end that no event exists for the user
-      }
-
-}
-
-searchBar.addEventListener('keyup', (e) => {
-    const searchString = e.target.value.toLowerCase();
-    console.log(searchString);
-
-    const filteredEvents = hpEvents.filter( Event => {
-        return(
-            Event.name.toLowerCase().includes(searchString) || 
-            Event.date.includes(searchString)
-        );
-    });
-    displayEvents(filteredEvents);
-});
-
-const loadEvents = async() => {
-    try {
-        const res =await fetch('http://localhost:9000/events/search'); //add address of eventlist in ''
-        hpEvents = await res.json();
-        displayEvents(hpEvents);
-        console.log(hpEvents);
+        // const res = await fetch('http://localhost:9000/events/search',{
+        //     method:"POST",
+        //     data: JSON.stringify({
+        //         username: "hersh", //logincontrol.getUsername(), //grab the user name from the front end (where is the username stored in the front end?)
+        //         eventname: "loll", 
+        //     })
+        // }) //add address of eventlist in ''
+        
+        await axios.post('http://localhost:9000/events/search', {
+            username: event.username, //logincontrol.getUsername(), //grab the user name from the front end (where is the username stored in the front end?)
+            eventname: event.eventname, 
+          })
+          .then(function (response) {
+            //   var i;
+            //   for( i = 0; i < response.data.length; i++){
+            //     hpEvents.push(response.data[i]);
+            //   }
+            response?.data.map((data) => {
+                hpEvents.push(data);
+            })
+          })
+          .catch(function (error) {
+            console.log(error);
+          });
+          
+          displayEvents(hpEvents, eventList);
     }catch (err){
         console.error(err);
     }
 };
 
-const displayEvents = (Events) => {
-    const htmlString = Events //Just assume the eventlist is on htmlpage
+export const displayEvents = (events, eventList) => {
+    const htmlString = events //Just assume the eventlist is on htmlpage
         .map((Event) => {
+            console.log(Event)
             return `
             <li class="Event">
-                <h2>${Event.name}</h2>
-                <p>Date: ${Event.date}</p>
+                <h2>${Event.eventname}</h2>
+                <p>Date: ${Event.sdate}</p>
             </li>
         `;
         })

@@ -104,13 +104,19 @@ router.route('/display_event_object').post(async (req, res) => {
 
 });
 
-router.route('/search').get(async (req, res) => {
-    const event = await Event.find({eventname: req.body.eventname})
+router.route('/search').post(async (req, res) => {
+    let event = []
+    if(req.body.eventname){
+    event = await Event.find({eventname: req.body.eventname})
+    }
+    else{
+    event = await Event.find({username: req.body.username})
+    }
     if (!event.length){
         return res.status(400).json('Event not found.')
     }else{
          //if the event is matched, but the search is not the same as the one created the event, return error.
-         //returns an array of events (there could be multiple). Uses a loop to verify username for each event.
+         //returns an array of events (there could be multiple). Uses a loop to verify username for each event
          var i;
          for (i = 0; i < event.length; i++) { 
             if (req.body.username !== event[i].username){
@@ -122,6 +128,8 @@ router.route('/search').get(async (req, res) => {
          }
          return res.json(event)
         }
+    
+
 })
 
 //search by eventname
