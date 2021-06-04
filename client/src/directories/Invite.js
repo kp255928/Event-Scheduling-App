@@ -15,7 +15,7 @@ const Invite = () => {
     const [invitestat, setinvitestat] = useState('');
     const [is_false, set_is_false] = useState('');
     const [is_ok, set_ok] = useState('');
-    const [event_successful, setES] = useState('');
+    const [requestString, setRS] = useState('');
     const curr_user = logincontrol.getUsername();
     console.log(curr_user);
     const history = useHistory();
@@ -25,10 +25,14 @@ const Invite = () => {
 
     const handleAccept = (e) => {
         accept_event_Invitation(curr_user);
+        e.preventDefault();
+        setRS(true);
     };
 
     const handleReject = (e) => {
         deny_event_Invitation(curr_user);
+        e.preventDefault();
+        setRS(true);
     };
 
     const handleButton = (e) => {
@@ -40,8 +44,6 @@ const Invite = () => {
             if(is_ok == true){
                 invite_user(inviteUser, curr_user, event);
                 setinvitestat("Invitation successful");
-            }else{
-                setinvitestat("The is no such event existed");
             }
             
             //history.push('/');
@@ -80,6 +82,66 @@ const Invite = () => {
     
              });
     }
+    function get_request_received_from(curr_user){
+        const obj = {
+            username:curr_user
+        }
+        return axios({
+            method: "POST",
+            data: obj,
+            url : "http://localhost:9000/users/receivedfrom",
+            
+        }).then((res) => {
+            return res.data; 
+
+        });
+    }
+    function accept_event_Invitation(curr_user){
+        let returned1 = get_request_received_from(curr_user);
+        returned1.then(function(result) {
+            console.log(result);
+            const invited_user_event = {
+                username: result,
+                eventname: requestEvent
+            }
+            let returned = checking(invited_user_event);
+            returned.then(function(result) {
+            console.log(result)
+            const user_event = {
+                username: curr_user,
+                eventname: result[0].eventname,
+                date:result[0].date,
+                time:result[0].time
+            }
+
+            console.log(user_event)
+            if((user_event.username != null) && (user_event.eventname != null) &&(user_event.date != null) &&(user_event.time != null)){
+                axios.post('http://localhost:9000/events/add', user_event);
+            }
+         });
+
+         });
+
+        
+        //axios.post('http://localhost:9000/events/add', invited_user_event);
+    
+    }
+    function checking(user){
+        return axios({
+            method: "POST",
+            data: user,
+            url : "http://localhost:9000/events/display_event_object_by_username",
+            
+        }).then((res) => {
+            return res.data;         
+        });
+    }
+    function update(invitestat){
+        if(invitestat == "There is no such event existed"){
+            setinvitestat("There is no such event existed");
+        }
+    
+    }
     return(
         <div className='invite'>
             { logincontrol.isLoggedIn()?
@@ -102,9 +164,11 @@ const Invite = () => {
                         />
                         <button onClick={handleButton}>Invite now</button>
                     </form>
+                    
                     <h1>{invitestat} </h1>
+                    <h1>{update(invitestat)} </h1>
                     <div className='checkrequest'>
-                        {check_if_being_requested(curr_user)?
+                        {check_if_being_requested(curr_user) && !requestString?
                             <div className='display'>
                                 <h2 className='message'>You have the following Invitation!</h2>
                                 <form>
@@ -144,6 +208,7 @@ function invite_user(user_to_invite,username,event){
         user_to_invite:user_to_invite,
         event: event,
     }
+
     try{
         axios.post('http://localhost:9000/users/search_user_to_invite/', invite_information);
         //display something like: request sent to user_to_invite successfully
@@ -195,22 +260,7 @@ function check_request(usr){
 }
 
 
-function accept_event_Invitation(curr_user){
-    const user = {
-        username: curr_user 
-    }
-    let info;
-    info = axios.post('http://localhost:9000/users/accept_event_Invitation', user);
-    
-    //if accepted, add the event to the invited person
-    //axios.post('http://localhost:9000/events/add', current_user_event);
-    const invited_user_event = {
-        username: info.user,
-        event: info.sender
-    }
-    axios.post('http://localhost:9000/events/add', invited_user_event);
 
-}
 
 function deny_event_Invitation(username){
     const user = {

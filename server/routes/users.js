@@ -152,6 +152,17 @@ router.route('/deny_event_Invitation').post(async (req, res) => {
 
 });
 
+router.route('/receivedfrom').post(async (req, res) => {
+    let user = await User.findOne({username: req.body.username})
+    if (user == null){
+        return res.status(400).json('User not founds.')
+    }
+    else{
+        return res.send(user.request_received_from);
+    }
+
+});
+
 router.route('/add').post((req, res) => {
     console.log("ss")
     const username = req.body.username;

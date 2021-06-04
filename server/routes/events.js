@@ -104,6 +104,36 @@ router.route('/display_event_object').post(async (req, res) => {
 
 });
 
+router.route('/display_event_object_by_username').post(async (req, res) => {
+    let events = []
+    
+    const username = req.body.username;
+    const eventname = req.body.eventname;
+    console.log(username,eventname)
+      //Where User is you mongoose user model
+      Event.find({} , (err, event) => {
+        if(err) //do something...
+        return res.send("Event or the user is not found")
+        event.map(event => {
+            console.log(event.eventname== eventname)
+            console.log(event.username == username)
+            if(event.username == username && event.eventname == eventname){
+                console.log("pushed")
+                    obj = {
+                        eventname:event.eventname,
+                        date:event.sdate,
+                        time:event.stime
+                    }
+                    events.push(obj);
+
+            }
+        })
+        return res.send(events)
+    })
+
+});
+
+
 router.route('/search').get(async (req, res) => {
     const event = await Event.find({eventname: req.body.eventname})
     if (!event.length){
