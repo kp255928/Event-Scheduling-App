@@ -2,7 +2,7 @@ Event Scheduling App with Nodejs, Express, Mongodb, React, Mongoose, Axios and P
 
 List of APIs
 
-The application provides below mentioned APIs for creating, editing, deleting, searching the events in the database. In addition passport authentication is used for user log-in/sign-up. The APIs work as an interface between the calendar UI application and the database.
+The application provides below mentioned APIs for creating, editing, deleting, searching the events in the database. In addition passport authentication is used for user log-in/sign-up. The APIs work as an interface between the application and the database.
 
 <!-- Index page: GET /
 Signup page: GET /signup
