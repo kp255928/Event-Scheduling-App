@@ -24,13 +24,28 @@
 }
 
 .navbar #searchBar {
-  width: 100%;
+  width: 80%;
   height: 20px;
   border-radius: 10px;
   border: 3px solid #eaeaea;
   padding: 5px 15px;
   font-size: 16px;
   text-align: left;
+}
+
+.navbutton {
+  width: 5%;
+  height: 30px;
+  background: white;
+  color: rgb(45,104,196);
+  border: 1px solid rgb(45,104,196);
+  border-radius: 50px;
+  align-items: centerx;
+  text-align: center;
+}
+
+.match {
+  color: rgb(45,104,196);
 }
 
 .navbar .navlinks {

@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import './index.css';
 import logincontrol from "./LoginControl";
 import {loadEvents, displayEvents } from "./directories/SearchBar"
-import ReactCircleModal from 'react-circle-modal'
+// import ReactCircleModal from 'react-circle-modal'
 import Modal from 'react-modal'
 const NavBar = () => {
     //let eventList;
@@ -63,9 +63,9 @@ const NavBar = () => {
                     onChange={(e) => handleChange(e)}
                 />
             </div>
-            <button onClick={() => setModalIsOpen(true)}>Display Search Result</button>
+            <button className="navbutton" onClick={() => setModalIsOpen(true)}>Search</button>
             <Modal isOpen = {modalIsOpen} onRequestClose={()=>setModalIsOpen(false)}>
-                <h2>Matched events</h2>
+                <h2 className="match">Matched events</h2>
                 <p> <ul id="eventList">
                 {filteredEvents.map((event) =>(
                             <div className="event-preview" key={event.id}>
@@ -76,7 +76,7 @@ const NavBar = () => {
                             </div>
                         ))}
             </ul></p>
-                <button onClick={()=>setModalIsOpen(false)}>Closed</button>
+                <button className="navbutton" onClick={()=>setModalIsOpen(false)}>Closed</button>
 
             </Modal>
             
