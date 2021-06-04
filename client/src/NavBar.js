@@ -7,7 +7,7 @@ const NavBar = () => {
     // logincontrol.login();
     return(
         <nav className="navbar">
-            <Link to="/" className="icon">Calendar App</Link>       
+            <Link to="/" className="icon">Event Scheduler App</Link>       
             <div className="navlinks">
                 {logincontrol.isLoggedIn() ? 
                     <Link to="/" className="link" onClick={logincontrol.logout}>Log out</Link>
