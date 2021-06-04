@@ -44,7 +44,7 @@ const NavBar = () => {
                 <Link to="/invite" className="link">Invite friends</Link>
                 <Link to="/search" className="link">Search event</Link>
             </div>
-            {/* <div id="searchWrapper">
+            <div id="searchWrapper">
                 <input
                     type="text"
                     name="searchBar"
@@ -53,7 +53,7 @@ const NavBar = () => {
                     onChange={(e) => handleChange(e)}
                 />
             </div>
-            <ul id="eventList"></ul> */}
+            <ul id="eventList"></ul>
         </nav>
     );
 } 
