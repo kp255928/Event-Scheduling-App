@@ -1,11 +1,12 @@
-import React, { Fragment, useEffect } from 'react';
+import React, { Fragment, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import './index.css';
 import logincontrol from "./LoginControl";
 import {loadEvents, displayEvents } from "./directories/SearchBar"
 
 const NavBar = () => {
-    let eventList;
+    //let eventList;
+    const [filteredEvents, setFilteredEvents] = useState([]);
     let hpEvents=[];
     const event = {
     username: logincontrol.getUsername(), //logincontrol.getUsername(), //grab the user name from the front end (where is the username stored in the front end?)
@@ -13,13 +14,16 @@ const NavBar = () => {
 }
     // logincontrol.login();
 
-    useEffect(() => {
-        eventList = document.getElementById('eventList');
-        loadEvents(event, eventList, hpEvents);
+    useEffect(async() => {
+        //let eventList = document.getElementById('eventList');
+        await loadEvents(event, hpEvents);
     },[])
 
-    const handleChange =(e) => {
+    const handleChange = async(e) => {
+        hpEvents=[];
+        await loadEvents(event, hpEvents);
         const searchString = e.target.value.toLowerCase();
+        if(searchString){
         console.log(searchString);
         const filteredEvents = hpEvents.filter( Event => {
             return(
@@ -27,7 +31,12 @@ const NavBar = () => {
                 Event.sdate.includes(searchString)
             );
         });
-        displayEvents(filteredEvents, eventList);
+        setFilteredEvents(filteredEvents)
+        //displayEvents(filteredEvents, eventList);
+        }
+        else{
+            setFilteredEvents([])
+        }
     }
 
     return(
@@ -42,7 +51,6 @@ const NavBar = () => {
                 {/* <Link to="/login" className="link">Log in</Link> */}
                 {/* <Link to="/create" className="link">Create events</Link> */}
                 <Link to="/invite" className="link">Invite friends</Link>
-                <Link to="/search" className="link">Search event</Link>
             </div>
             <div id="searchWrapper">
                 <input
@@ -53,7 +61,16 @@ const NavBar = () => {
                     onChange={(e) => handleChange(e)}
                 />
             </div>
-            <ul id="eventList"></ul>
+            <ul id="eventList">
+                {filteredEvents.map((event) =>(
+                            <div className="event-preview" key={event.id}>
+                                <h2>{ event.eventname }</h2>
+                                <p>date: { event.sdate }</p>
+                                <p>Time: { event.stime }</p>
+
+                            </div>
+                        ))}
+            </ul>
         </nav>
     );
 } 
