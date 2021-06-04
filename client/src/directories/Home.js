@@ -160,7 +160,7 @@ const Home = () => {
                     <button className="show-button" onClick={handleB}>Reload events</button>
                     {userEvent.length === 0?
                         <div className="message">
-                            <h2>You have no upcoming event, check back again</h2>
+                            <h2>You have no upcoming events. Please check again later.</h2>
                         </div>
                     :
                         <div className="display">
