@@ -19,7 +19,7 @@ router.route('/checkconflict').post(async (req,res)=>{
                console.log(event[i].stime)
                if(stime === event[i].stime){
                     console.log("here")
-                    return res.send({message:"Conflict detected. Please change your event date/time"})
+                    return res.send({message:"Conflict detected. You entered " + sdate + " at " + stime + ". Your event [" + event[i].eventname + "] is also on the same time. Please change your event date/time"})
                }
            }
         //    if(sdate.substring(0,2)===event.sdate.substring(0,2)){
