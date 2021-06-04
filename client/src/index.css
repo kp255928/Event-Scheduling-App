@@ -49,18 +49,72 @@
 .home {
   max-width: 900px;
   margin: 40px auto;
+  /* display: block; */
+  text-align: center;
 }
 
-.home-message {
+.home form {
+  text-align: left;
+}
+
+.home .message {
   font-size: 20px;
   color: rgb(45,104,196);
   margin-bottom: 8px;
-  text-align: center;
+  text-align: left;
 }
+
+.home .create {
+  align-items: center;
+}
+
+.home .create label {
+  font-size: 20px;
+  text-align: left;
+}
+
+.home .create input {
+  text-align: center;
+  font-size: 20px;
+  width: 25%;
+  padding: 5px 10px;
+  margin: 10px 0px;
+  border: 2px solid #eaeaea;
+  border-radius: 7px;
+  box-sizing: border-box;
+  display: block;
+  align-items: center;
+}
+
+.home .create button {
+  width: 25%;
+  font-size: 20px;
+  background: white;
+  color: rgb(45,104,196);
+  border: 3px solid #eaeaea;
+  padding: 8px;
+  border-radius: 8px;
+  cursor: pointer;
+  margin-bottom: 25px;
+}
+
+.home .show-button {
+  width: 30%;
+  font-size: 20px;
+  background: rgb(45,104,196);
+  color: white;
+  border: 0px;
+  padding: 8px;
+  border-radius: 8px;
+  cursor: pointer;
+  margin-bottom: 25px;
+}
+
 .event-preview {
   margin: 40px auto;
   padding: 10px 16px;
   border: 1px solid #eaeaea;
+  text-align: center;
 }
 
 .event-preview:hover {
