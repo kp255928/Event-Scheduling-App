@@ -105,7 +105,7 @@ const Login = () => {
             </form>
             </div>
             <div className="accountaction">
-                <label className="accountmessage">Don't have an acco unt?</label>
+                <label className="accountmessage">Don't have an account?</label>
                 <div className="accountlinks">
                     <Link to="/signup" className="link">Sign up</Link>
                 </div>
