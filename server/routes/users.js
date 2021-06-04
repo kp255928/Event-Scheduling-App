@@ -208,6 +208,7 @@ router.route('/register').post((req,res) =>{
 router.get('/home', (req,res)=> {
     res.render('index.ejs', {username: req.username})
 });
+
 router.route('/login').post(async (req, res, next) => {
     passport.authenticate("local", (err, user, info) => {
       if (err) throw err;
@@ -225,6 +226,7 @@ router.route('/login').post(async (req, res, next) => {
   router.route('/register').post((req, res) => {
     User.findOne({ username: req.body.username }, async (err, doc) => {
       if (err) throw err;
+      if (req.body.password.length<4) return res.status(400).json('password mush be larger than 4')
       if (doc) res.send({ message: "User Already Exists"});
       if (!doc) {
         const hashedPassword = await bcrypt.hash(req.body.password, 10);
@@ -283,8 +285,8 @@ router.route('/update/:id').post(async (req, res) => {
 
         return res.json("User updated succesfully");
     }
-    catch (error) {
-        console.error(error.message);
+    catch (err) {
+        console.error(err.message);
         res.status(500).send("Server Error");
     } 
 })
