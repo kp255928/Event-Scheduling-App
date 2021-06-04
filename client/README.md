@@ -48,6 +48,10 @@ This created the search bar displayed in the navbar. and connect with backend to
 ### `index.css`
 This contains all the design for the webpage that will be displayed to the client.
 
+### `Calendar.html`
+This code compiles, and is the original look for our homepage. But we are suffering to link React app with this html file. So we make a new simple version instead.
+
+
 
 In the project directory, you can run:
 
