@@ -72,9 +72,9 @@ Embedded JavaScript (ejs) is a client-side templating language and it is used as
 
 Set Up:
 
-Install Nodejs and MongoDB
-Get source code: git clone https://github.com/kp255928/cs35l_project/edit/main/README.md
-Install dependencies with 'npm install'
-Start MongoDB
-Use 'npm start' to start Nodejs server and the React app
+Install Nodejs and MongoDB<br>
+Get source code: git clone https://github.com/kp255928/cs35l_project/edit/main/README.md<br>
+Install dependencies with 'npm install'<br>
+Start MongoDB<br>
+Use 'npm start' to start Nodejs server and the React app<br>
 Open web browser and go to http://localhost:3000
