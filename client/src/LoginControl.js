@@ -20,6 +20,7 @@ class LoginControl {
     }
 
     logout() {
+        window.location.reload();
         new LoginControl;
     }
 
