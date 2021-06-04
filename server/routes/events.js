@@ -79,8 +79,14 @@ router.route('/display_event').post(async (req, res) => {
 
 });
 
-router.route('/search').get(async (req, res) => {
-    const event = await Event.find({eventname: req.body.eventname})
+router.route('/search').post(async (req, res) => {
+    let event = []
+    if(req.body.eventname){
+    event = await Event.find({eventname: req.body.eventname})
+    }
+    else{
+    event = await Event.find({username: req.body.username})
+    }
     if (!event.length){
         return res.status(400).json('Event not found.')
     }else{
@@ -97,6 +103,8 @@ router.route('/search').get(async (req, res) => {
          }
          return res.json(event)
         }
+    
+
 })
 
 //search by eventname
