@@ -2,27 +2,29 @@ const router = require('express').Router();
 let Event = require('../datamodel/events');
 let User = require('../datamodel/user');
 //var request = requrire('request');
-router.route('/checkconflict').get((req,res)=>{
-    const sdate = req.body.sdate;
-    const stime = req.body.stime;
-    const edate = req.body.edate;
-    const etime = req.body.etime;
+router.route('/checkconflict').get(async (req,res)=>{
+    const sdate = req.body.date;
+    const stime = req.body.time;
 
-    const event = Event.find({username: req.body.username})
-    if(event.length = 0) return res.send({message: "No any events added"})
+
+    const event = await Event.find({username: req.body.username})
+    if(event.length === 0) return res.send({message: "No any events added"})
     else{
+        console.log(event)
+        console.log(sdate, stime)
         for(i=0; i<event.length; i++){
-           if(sdate == event.sdate && edate == event.edate){
+           if(sdate === event[i].sdate){
                // we use 0000->2359 format
-               if((stime<event.stime && etime>event.stime)||(stime>event.stime && stime<event.etime))
+               if(stime === event[i].stime){
                return res.send({message:"there is conflict"})
+               }
            }
-           if(sdate.substring(0,2)==event.sdate.substring(0,2) && edate.substring(0,2)==event.edate.substring(0,2)){
-            if(sdate.substring(2,4)<event.sdate.substring(2,4) && edate.substring(2,4)>event.sdate.substring(2,4))
-                return res.send({message:"there is conflict"})
-            if(sdate.substring(2,4)>event.sdate.substring(2,4) && sdate.substring(2,4)<event.edate.substring(2,4))
-                return res.send({message:"there is conflict"})
-           }
+        //    if(sdate.substring(0,2)===event.sdate.substring(0,2)){
+        //     if(sdate.substring(2,4)<event.sdate.substring(2,4) && edate.substring(2,4)>event.sdate.substring(2,4))
+        //         return res.send({message:"there is conflict"})
+        //     if(sdate.substring(2,4)>event.sdate.substring(2,4) && sdate.substring(2,4)<event.edate.substring(2,4))
+        //         return res.send({message:"there is conflict"})
+           
         }
         return res.send({message:"no conflict found"})
     }
@@ -37,17 +39,13 @@ router.route('/').get((req, res) => {
 router.route('/add').post((req, res) => {
     const username = req.body.username;
     //const description = req.body.description;
-    const sdate = req.body.sdate;
-    const stime = req.body.stime;
-    const edate = req.body.edate;
-    const etime = req.body.etime;
+    const sdate = req.body.date;
+    const stime = req.body.time;
     const eventname = req.body.eventname;
 
     const newEvent = new Event({
         sdate,
         stime,
-        edate,
-        etime,
         eventname,
         username
     });
@@ -128,18 +126,14 @@ router.route('/update/:id').post(async (req, res) => {
     const {
         sdate,
         stime,
-        edate,
-        etime,
         eventname,
         username
     } = req.body;
     
     const eventFields= {};
     eventFields.id = req.params.id;
-    if (sdate) eventFields.sdate = sdate.trim();
-    if (stime) eventFields.stime = stime.trim();
-    if (edate) eventFields.edate = edate.trim();
-    if (etime) eventFields.etime = etime.trim();
+    if (sdate) eventFields.date = sdate.trim();
+    if (stime) eventFields.time = stime.trim();
     if (eventname) eventFields.eventname = eventname.trim();
     if (username) eventFields.username = username.trim();
 
