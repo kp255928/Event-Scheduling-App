@@ -3,10 +3,12 @@ import { Link } from 'react-router-dom';
 import './index.css';
 import logincontrol from "./LoginControl";
 import {loadEvents, displayEvents } from "./directories/SearchBar"
-
+import ReactCircleModal from 'react-circle-modal'
+import Modal from 'react-modal'
 const NavBar = () => {
     //let eventList;
     const [filteredEvents, setFilteredEvents] = useState([]);
+    const[modalIsOpen,setModalIsOpen] = useState(false)
     let hpEvents=[];
     const event = {
     username: logincontrol.getUsername(), //logincontrol.getUsername(), //grab the user name from the front end (where is the username stored in the front end?)
@@ -18,7 +20,7 @@ const NavBar = () => {
         //let eventList = document.getElementById('eventList');
         await loadEvents(event, hpEvents);
     },[])
-
+   
     const handleChange = async(e) => {
         hpEvents=[];
         await loadEvents(event, hpEvents);
@@ -61,7 +63,10 @@ const NavBar = () => {
                     onChange={(e) => handleChange(e)}
                 />
             </div>
-            <ul id="eventList">
+            <button onClick={() => setModalIsOpen(true)}>Display Search Result</button>
+            <Modal isOpen = {modalIsOpen} onRequestClose={()=>setModalIsOpen(false)}>
+                <h2>Matched events</h2>
+                <p> <ul id="eventList">
                 {filteredEvents.map((event) =>(
                             <div className="event-preview" key={event.id}>
                                 <h2>{ event.eventname }</h2>
@@ -70,7 +75,11 @@ const NavBar = () => {
 
                             </div>
                         ))}
-            </ul>
+            </ul></p>
+                <button onClick={()=>setModalIsOpen(false)}>Closed</button>
+
+            </Modal>
+            
         </nav>
     );
 } 

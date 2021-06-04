@@ -23,6 +23,7 @@ const Invite = () => {
     // temp here
     // logincontrol.login()
 
+    
     const handleAccept = (e) => {
         accept_event_Invitation(curr_user);
         e.preventDefault();

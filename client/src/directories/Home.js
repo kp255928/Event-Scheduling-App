@@ -78,7 +78,7 @@ const Home = () => {
         let returned = conflict_check(event_object);
         returned.then(function(result) {
             console.log(result.data.message)
-            if(result.data.message == "Conflict detected. Please change your event date/time"){
+            if(result.data.message.substring(0,17) == "Conflict detected"){
                 update_isConflict(result.data.message)
             }else{
                 update_isConflict(" ")
