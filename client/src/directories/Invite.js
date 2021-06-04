@@ -180,7 +180,7 @@ const Invite = () => {
                             </div>
                         :
                             <div className='display'>
-                                <h2 className='message'>You have no invation! Check back later!</h2>
+                                <h2 className='message'>You have no invitations! Check back later!</h2>
                             </div>
                         }
                     </div>
