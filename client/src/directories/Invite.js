@@ -140,7 +140,7 @@ const Invite = () => {
             invite_user(inviteUser, curr_user, event);
             setinvitestat("Invitation successful");
         }else if(is_ok == false){
-            setinvitestat("There is no such event existed");
+            setinvitestat("Your request has been processed");
         }
     }
     return(
