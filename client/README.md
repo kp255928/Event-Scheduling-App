@@ -8,19 +8,49 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 ### `npm install`
 
-in the client directory<br /><br />
+in the client directory<br />
 
-<br>To open the webpage properly, install the following packages:
+This is the client side of the project.
 
-### `npm install react-router-dom`
+The client side will display and capture the data needed with backend for our application to work properly.
 
-### `npm install react-date-picker`
+### `App.js`
+This page creates the routes for each site being used
 
-<br />
+### `index.js`
+This page launch the app
 
+### `NavBar.js`
+This is the navigation bar for user to switch between routes and search for events using search bar
 
+### `LoginControl.js`
+This keep track with whether a user is logged in or not, and check if a user exists from our database or not
 
-<br />
+### `SignUp.js`
+Access this page by going to the directory "/signup" or click on the Log in button on the navbar and click on create account under the form.
+This allows user to sign up an account with our app. It is not a bug to display the password out. We are not hiding the password so the user don't have to check if there's a typo with their password.
+
+### `SignIn.js`
+Access this page by going to the directory "/signin" or click on the Log in button on the navbar.
+This reads the user's username and password and check with backend if the user is registered in our database.
+
+### `Home.js`
+Access this page by going to the directory "/" or click on our App's name on the top left.
+This display the homepage to the user. Which contains create events, check conflicts, and load for all events in the user's account form database.
+
+### `Invite.js`
+Access this page by going to the directory "/invite" or click on the invitation button on the navbar
+This allows user to invite another existing user to join an event that current user is in. A error message will display if no specific events found in current user's account. It also allows user to accept or decline the invitation from others. Once accepted, the event will be added to the user's account, and can be displayed in search bar or homepage.
+
+### `SearchBar`
+This created the search bar displayed in the navbar. and connect with backend to be functional.
+
+### `index.css`
+This contains all the design for the webpage that will be displayed to the client.
+
+### `Calendar.html`
+This code compiles, and is the original look for our homepage. But we are suffering to link React app with this html file. So we make a new simple version instead.
+
 
 
 In the project directory, you can run:

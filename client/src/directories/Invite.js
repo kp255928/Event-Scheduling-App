@@ -155,7 +155,7 @@ const Invite = () => {
                             onChange={ (e) => setInviteUser(e.target.value) }
                             placeholder="Enter your friend's username"
                         />
-                        <label className='message'>Choose an event(that already existed) to invite</label>
+                        <label className='message'>Choose an event (that already exists) to invite</label>
                         {/* could use map here to do options in created event */}
                         <input
                             type="text"
@@ -180,7 +180,7 @@ const Invite = () => {
                             </div>
                         :
                             <div className='display'>
-                                <h2 className='message'>You have no invation! Check back later!</h2>
+                                <h2 className='message'>You have no invitations! Check back later!</h2>
                             </div>
                         }
                     </div>
