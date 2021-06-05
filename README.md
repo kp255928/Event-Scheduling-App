@@ -18,7 +18,7 @@ Open two terminals, go to `cs35l_project/client` and do `npm start`<br>
 Another one go to `cs35l_project/server` and do `npm start`<br>
 Open web browser and go to http://localhost:3000
 
-One known bug - When first starting the login, need to press the "login" button twice to store the username into <br>
+One known bug - **When first starting the login, need to press the "login" button **twice** to store the username into <br>
 logincontrol.username inorder to use it for other functions<br>
 This is primarily due to the asynchronus call of the react "setState" within the Axios requests so that the state will not be set<br>
 until the handleClick(e) is finished(first click is finish). So we can only see the state changes in the second click.<br>
