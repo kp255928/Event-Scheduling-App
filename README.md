@@ -12,7 +12,7 @@ Get in the server: `cd server`<br>
 Install server dependency: `npm install` <br>
 Go to client cd `../client` <br>
 Install client dependency: `npm install`<br>
-Start MongoDB<br> - Create your MongoDB Atlas account and put your authentication string into `.env` file(first line) <br>
+Start MongoDB<br> - Create your MongoDB Atlas account and put your authentication string into `.env` file(first line) / with ur own cluster <br>
 
 Open two terminals, go to `cs35l_project/client` and do `npm start`<br>
 Another one go to `cs35l_project/server` and do `npm start`<br>
