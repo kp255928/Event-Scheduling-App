@@ -163,7 +163,7 @@ const Invite = () => {
                             onChange={ (e) => setEvent(e.target.value) }
                             placeholder="Enter event's name"
                         />
-                        <button onClick={click_twice}>Invite now</button>
+                        <button onClick={click_twice}>Invite now (Please Double Click to confirm)</button>
                     </form>
                     <h1>{invitestat} </h1>
                     <div className='checkrequest'>
