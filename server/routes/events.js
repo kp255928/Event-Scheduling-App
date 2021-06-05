@@ -5,8 +5,6 @@ let User = require('../datamodel/user');
 router.route('/checkconflict').post(async (req,res)=>{
     const sdate = req.body.sdate;
     const stime = req.body.stime;
-
-
     const event = await Event.find({username: req.body.username})
     //if(event.length === 0) return res.send({message: "No any events added"})
     //else{
