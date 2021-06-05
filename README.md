@@ -4,18 +4,18 @@ Event Scheduling App with Nodejs, Express, Mongodb, React, Mongoose, Axios and P
 
 Set Up:
 
-Install Nodejs and MongoDB<br>
-Get source code: git clone https://github.com/kp255928/cs35l_project<br>
-Get into the project folder: cd cs35l_project<br>
-Install dependencies with 'npm install'<br>
-Get in the server: cd server<br>
+Install `Nodejs` and `MongoDB`<br>
+Get source code: `git clone https://github.com/kp255928/cs35l_project`<br>
+Get into the project folder: `cd cs35l_project`<br>
+Install dependencies with `npm install`<br>
+Get in the server: `cd server`<br>
 Install server dependency: `npm install` <br>
-Go to client cd ../client <br>
+Go to client cd `../client` <br>
 Install client dependency: `npm install`<br>
-Start MongoDB<br> - Create your MongoDB Atlas account and put your authentication string into .env file(first line) <br>
+Start MongoDB<br> - Create your MongoDB Atlas account and put your authentication string into `.env` file(first line) <br>
 
-Open two terminals, go to cs35l_project/client and do `npm start`<br>
-Another one go to cs35l_project/server and do `npm start`<br>
+Open two terminals, go to `cs35l_project/client` and do `npm start`<br>
+Another one go to `cs35l_project/server` and do `npm start`<br>
 Open web browser and go to http://localhost:3000
 
 
