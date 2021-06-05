@@ -226,9 +226,9 @@ router.route('/login').post(async (req, res, next) => {
   router.route('/register').post((req, res) => {
     User.findOne({ username: req.body.username }, async (err, doc) => {
       if (err) throw err;
-      //if (req.body.password.length<4) return res.status(400).json('password mush be larger than 4')
+      if (req.body.password.length<4) res.send({message:'password mush be larger than 4'});
       if (doc) res.send({ message: "User Already Exists"});
-      if (!doc) {
+      else if (!doc && req.body.password.length>=4) {
         const hashedPassword = await bcrypt.hash(req.body.password, 10);
   
         const newUser = new User({
