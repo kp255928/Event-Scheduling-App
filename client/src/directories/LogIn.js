@@ -59,11 +59,17 @@ const Login = () => {
         e.preventDefault();
         
         console.log(logInStatus + "ok")
+        update();
         //logincontrol.username = data.username; //set login control username
-        // history.push('/');
+        //history.push('/');
      }
+     const to_home = (e) => {
+        logincontrol.username = username
+        history.push('/');
+     }
+
      function update(logInStatus){
-         console.log(logInStatus)
+         console.log("called update")
          if(logInStatus === "Successfully Authenticated"){
             console.log(data.username)
             logincontrol.username = data.username;
@@ -71,6 +77,10 @@ const Login = () => {
             logincontrol.login();
             // history.push('/');
          }
+     }
+     const click_twice = (e)=> {
+        handleButton(e);
+        //handleButton(e);
      }
     return(
         
@@ -99,9 +109,10 @@ const Login = () => {
                     onChange={ (e) => setPassword(e.target.value) }
                     placeholder="Password"
                 />
-                <button onClick={handleButton}>Log In</button>
-                <h1>{logInStatus} </h1>
+                <button onClick={click_twice}>Log In</button>
+                <h1>{logInStatus}</h1>
                 <h1>{update(logInStatus)} </h1>
+                <button onClick={to_home}>Go to Home Page</button>
             </form>
             </div>
             <div className="accountaction">

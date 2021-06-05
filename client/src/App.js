@@ -26,7 +26,7 @@ class App extends React.Component {//newly created function
     componentWillMount() {
         this.callAPI();
     }
-
+    
 
   render(){
     return(

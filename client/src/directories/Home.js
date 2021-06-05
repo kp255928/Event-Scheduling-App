@@ -4,6 +4,7 @@ import { Component } from 'react';
 //import { update } from '../../../server/datamodel/user';
 import '../index.css';
 import logincontrol from "../LoginControl";
+import login from "./LogIn.js";
 
 const Home = () => {
     useEffect(() => {
@@ -51,6 +52,7 @@ const Home = () => {
         //Time format is HH:MM
         display_events()
     }
+    
     function display_events(){
         return Axios({
             method: "POST",
@@ -126,6 +128,7 @@ const Home = () => {
         //     ))}
         // </div>
         <div className="home">
+            
             {logincontrol.isLoggedIn()?
                 <div>
                     <div className="message">

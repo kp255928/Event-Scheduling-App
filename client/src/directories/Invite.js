@@ -39,17 +39,15 @@ const Invite = () => {
     const handleButton = (e) => {
         if (inviteUser !== '' && event !== '') {
             e.preventDefault();
-            console.log(curr_user + "noes")
             display_event_by_user(curr_user,event)
-
-            if(is_ok == true){
-                invite_user(inviteUser, curr_user, event);
-                setinvitestat("Invitation successful");
-            }
-            
+            update();
             //history.push('/');
         }
     }
+    const click_twice = (e)=> {
+        handleButton(e);
+       // handleButton(e);
+     }
     function check_if_being_requested(current_user){
         const usr = {
             "username": current_user
@@ -137,11 +135,13 @@ const Invite = () => {
             return res.data;         
         });
     }
-    function update(invitestat){
-        if(invitestat == "There is no such event existed"){
+    const update = () => {
+        if(is_ok == true){
+            invite_user(inviteUser, curr_user, event);
+            setinvitestat("Invitation successful");
+        }else if(is_ok == false){
             setinvitestat("There is no such event existed");
         }
-    
     }
     return(
         <div className='invite'>
@@ -163,11 +163,9 @@ const Invite = () => {
                             onChange={ (e) => setEvent(e.target.value) }
                             placeholder="Enter event's name"
                         />
-                        <button onClick={handleButton}>Invite now</button>
+                        <button onClick={click_twice}>Invite now</button>
                     </form>
-                    
                     <h1>{invitestat} </h1>
-                    <h1>{update(invitestat)} </h1>
                     <div className='checkrequest'>
                         {check_if_being_requested(curr_user) && !requestString?
                             <div className='display'>
@@ -203,6 +201,7 @@ const Invite = () => {
 2. The current user that is doing the operation: "username"
 3. The event that the user is trying to add with another user "event"
 *****************************************************/
+
 function invite_user(user_to_invite,username,event){
     const invite_information = {
         username: username,
